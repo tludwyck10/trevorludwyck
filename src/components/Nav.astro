@@ -21,7 +21,11 @@ function isActive(href: string) {
 
 <header class:list={['site-nav', variant === 'solid' && 'site-nav--solid']}>
   <div class="site-nav__wrap wrap">
-    <a href="/" class="site-nav__mark">Trevor Ludwyck Photography</a>
+    <a href="/" class="site-nav__mark">
+      <span class="site-nav__mark-name">Trevor Ludwyck</span>
+      <span class="site-nav__mark-rule" aria-hidden="true"></span>
+      <span class="site-nav__mark-role">Photography</span>
+    </a>
 
     <button class="site-nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
       <span class="visually-hidden">Menu</span>
@@ -69,16 +73,35 @@ function isActive(href: string) {
   }
 
   .site-nav__mark {
-    font-family: var(--font-display);
-    font-size: 0.92rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     text-decoration: none;
     color: inherit;
     white-space: nowrap;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid currentColor;
+  }
+
+  .site-nav__mark-name {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 0.92rem;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .site-nav__mark-rule {
+    width: 1px;
+    height: 14px;
+    background: var(--color-gold);
+  }
+
+  .site-nav__mark-role {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.75;
   }
 
   .site-nav__menu ul {

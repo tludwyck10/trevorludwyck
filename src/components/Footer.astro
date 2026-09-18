@@ -4,7 +4,11 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="wrap site-footer__wrap">
-    <a href="/" class="site-footer__mark">Trevor Ludwyck Photography</a>
+    <a href="/" class="site-footer__mark">
+      <span class="site-footer__mark-name">Trevor Ludwyck</span>
+      <span class="site-footer__mark-rule" aria-hidden="true"></span>
+      <span class="site-footer__mark-role">Photography</span>
+    </a>
 
     <nav class="site-footer__nav" aria-label="Footer">
       <a href="/portfolio/">Portfolio</a>
@@ -36,15 +40,34 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__mark {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
     text-decoration: none;
     color: var(--color-white);
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid currentColor;
+  }
+
+  .site-footer__mark-name {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .site-footer__mark-rule {
+    width: 1px;
+    height: 16px;
+    background: var(--color-gold);
+  }
+
+  .site-footer__mark-role {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.75;
   }
 
   .site-footer__nav {
