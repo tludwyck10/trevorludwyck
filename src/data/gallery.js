@@ -9,17 +9,14 @@ function placeholder(seed, width = 1200, height = 1500) {
   return `https://picsum.photos/seed/${seed}/${width}/${height}?grayscale`;
 }
 
+// Placeholder hero — a studio portrait (black and white, free Unsplash
+// License, photo by Nik Bagherzadegan: unsplash.com/photos/09O1mBwgSJU).
+// Replace with a real session photo when one's ready; no other change
+// needed since ResponsiveImage already builds a srcset for this host.
 export const hero = {
-  src: placeholder('tlp-hero', 2400, 1600),
-  alt: 'Placeholder — portrait hero image',
+  src: 'https://images.unsplash.com/photo-1782144893518-a3b15d098e34?auto=format&fit=crop&q=80&w=2400',
+  alt: 'Placeholder — studio portrait, seated, dramatic low-key lighting',
 };
-
-export const featured = [
-  { src: placeholder('tlp-feat-1', 1200, 1500), alt: 'Placeholder — portrait, natural light', href: '/work/' },
-  { src: placeholder('tlp-feat-2', 1200, 1500), alt: 'Placeholder — portrait, golden hour', href: '/work/' },
-  { src: placeholder('tlp-feat-3', 1200, 1500), alt: 'Placeholder — portrait, studio light', href: '/work/' },
-  { src: placeholder('tlp-feat-4', 1200, 1500), alt: 'Placeholder — portrait, natural light', href: '/work/' },
-];
 
 export const seniors = [
   { src: placeholder('tlp-sr-1', 1400, 1750), alt: 'Placeholder — senior portrait 1' },

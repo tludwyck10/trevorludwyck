@@ -18,13 +18,26 @@ const { src, alt, sizes, priority = false, class: className } = Astro.props;
 const widths = [480, 768, 1024, 1440, 1920, 2400];
 
 function buildSrcSet(url: string) {
-  const match = url.match(/^https:\/\/picsum\.photos\/seed\/([^/]+)\/(\d+)\/(\d+)(\?.*)?$/);
-  if (!match) return undefined;
-  const [, seed, w, h, query] = match;
-  const ratio = Number(h) / Number(w);
-  return widths
-    .map((width) => `https://picsum.photos/seed/${seed}/${width}/${Math.round(width * ratio)}${query ?? ''} ${width}w`)
-    .join(', ');
+  const picsum = url.match(/^https:\/\/picsum\.photos\/seed\/([^/]+)\/(\d+)\/(\d+)(\?.*)?$/);
+  if (picsum) {
+    const [, seed, w, h, query] = picsum;
+    const ratio = Number(h) / Number(w);
+    return widths
+      .map((width) => `https://picsum.photos/seed/${seed}/${width}/${Math.round(width * ratio)}${query ?? ''} ${width}w`)
+      .join(', ');
+  }
+
+  if (url.startsWith('https://images.unsplash.com/')) {
+    return widths
+      .map((width) => {
+        const variant = new URL(url);
+        variant.searchParams.set('w', String(width));
+        return `${variant.toString()} ${width}w`;
+      })
+      .join(', ');
+  }
+
+  return undefined;
 }
 
 const srcset = buildSrcSet(src);
