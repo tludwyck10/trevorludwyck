@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PricingCard from '../../components/PricingCard.astro';
+---
+
+<BaseLayout
+  title="Investment"
+  description="Senior portrait and couples portrait session pricing for Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">Investment</p>
+    <h1>Simple pricing, two ways to book.</h1>
+    <p class="page-intro__copy">
+      No à la carte maze — each session type has two clear tiers. Every
+      package includes an online gallery and downloadable digital images.
+    </p>
+  </section>
+
+  <section class="pricing-group wrap">
+    <h2 class="pricing-group__title">Senior Portraits</h2>
+    <div class="pricing-grid">
+      <PricingCard
+        tier="Essential"
+        price="$650–750"
+        features={['1 location', 'Styled session', 'Online gallery', 'Digital images']}
+      />
+      <PricingCard
+        tier="Signature"
+        price="$1,200–1,500"
+        featured
+        features={['2 locations', 'Styled session', 'Online gallery', 'Digital images', 'Premium print product']}
+      />
+    </div>
+  </section>
+
+  <section class="pricing-group wrap">
+    <h2 class="pricing-group__title">Couples Portraits</h2>
+    <div class="pricing-grid">
+      <PricingCard
+        tier="Essential"
+        price="$550–650"
+        features={['1 location', '1 hour session', 'Digital images']}
+      />
+      <PricingCard
+        tier="Signature"
+        price="$1,000–1,300"
+        featured
+        features={['2 locations', '90 minute session', 'Digital images', 'Premium print product']}
+      />
+    </div>
+  </section>
+
+  <section class="page-cta wrap">
+    <h2>Have questions about a session?</h2>
+    <a href="/contact/" class="btn btn--gold">Inquire</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-block: calc(var(--space-xl) + 2rem) var(--space-lg);
+    max-width: 680px;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .page-intro__copy {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 55ch;
+  }
+
+  .pricing-group {
+    padding-bottom: var(--space-lg);
+  }
+
+  .pricing-group__title {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .page-cta {
+    padding-block: var(--space-md) var(--space-xl);
+    text-align: center;
+  }
+
+  .page-cta h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 720px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

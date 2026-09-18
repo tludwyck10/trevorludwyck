@@ -1,0 +1,42 @@
+---
+// Generates a srcset for the picsum.photos placeholder URLs used in
+// src/data/gallery.js. When real photography replaces those placeholders
+// with local files, swap this component's usage for Astro's built-in
+// <Image> (astro:assets) to get real optimized/resized output — this
+// component's job is just to keep placeholder pages honestly responsive
+// in the meantime.
+interface Props {
+  src: string;
+  alt: string;
+  sizes: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const { src, alt, sizes, priority = false, class: className } = Astro.props;
+
+const widths = [480, 768, 1024, 1440, 1920, 2400];
+
+function buildSrcSet(url: string) {
+  const match = url.match(/^https:\/\/picsum\.photos\/seed\/([^/]+)\/(\d+)\/(\d+)(\?.*)?$/);
+  if (!match) return undefined;
+  const [, seed, w, h, query] = match;
+  const ratio = Number(h) / Number(w);
+  return widths
+    .map((width) => `https://picsum.photos/seed/${seed}/${width}/${Math.round(width * ratio)}${query ?? ''} ${width}w`)
+    .join(', ');
+}
+
+const srcset = buildSrcSet(src);
+---
+
+<img
+  src={src}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  class={className}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding="async"
+  fetchpriority={priority ? 'high' : undefined}
+/>

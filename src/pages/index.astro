@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+import { hero, featured } from '../data/gallery.js';
+---
+
+<BaseLayout
+  title="Editorial Portraits in Celina & Dallas–Fort Worth, TX"
+  description="Trevor Ludwyck Photography — editorial senior portraits and couples portraiture in Celina, TX, serving Dallas–Fort Worth. Built on deliberate lighting, not high-volume shooting."
+  navVariant="overlay"
+>
+  <section class="hero">
+    <ResponsiveImage src={hero.src} alt={hero.alt} sizes="100vw" priority class="hero__image" />
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__content wrap">
+      <h1>Editorial portraits,<br />built on light.</h1>
+      <a href="/contact/" class="btn btn--on-dark">Inquire</a>
+    </div>
+  </section>
+
+  <section class="intro wrap">
+    <p class="eyebrow">Celina, TX — Dallas–Fort Worth</p>
+    <p class="intro__copy">
+      Every session starts with the light, not a prop list. The result is a small
+      set of considered images rather than a folder of near-duplicates —
+      portraits that hold up years from now. Two specialties, shot the same
+      deliberate way: senior portraits, and couples portraiture.
+    </p>
+  </section>
+
+  <section class="preview wrap">
+    <div class="preview__grid">
+      {featured.map((image) => (
+        <a href={image.href} class="preview__item">
+          <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 900px) 25vw, 50vw" />
+          <span class="preview__caption">{image.caption}</span>
+        </a>
+      ))}
+    </div>
+    <div class="preview__links">
+      <a href="/seniors/" class="btn">View Senior Portraits</a>
+      <a href="/couples/" class="btn">View Couples Portraits</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+    background: var(--color-black);
+  }
+
+  .hero :global(.hero__image) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 18, 15, 0.35) 0%, rgba(20, 18, 15, 0.15) 40%, rgba(20, 18, 15, 0.55) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding-bottom: var(--space-xl);
+    color: var(--color-white);
+  }
+
+  .hero__content h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    max-width: 16ch;
+  }
+
+  .intro {
+    padding-block: var(--space-xl);
+    max-width: 720px;
+  }
+
+  .intro__copy {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    line-height: 1.5;
+    margin-top: var(--space-sm);
+  }
+
+  .preview {
+    padding-bottom: var(--space-xl);
+  }
+
+  .preview__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .preview__item {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .preview__item :global(img) {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .preview__item:hover :global(img) {
+    transform: scale(1.04);
+  }
+
+  .preview__caption {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    color: var(--color-white);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(20, 18, 15, 0.55);
+    padding: 0.35rem 0.6rem;
+  }
+
+  .preview__links {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .preview__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__wrap">
+    <a href="/" class="site-footer__mark">Trevor Ludwyck <span>Photography</span></a>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a href="/seniors/">Seniors</a>
+      <a href="/couples/">Couples</a>
+      <a href="/investment/">Investment</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+
+    <div class="site-footer__meta">
+      <p>Celina, TX — serving Dallas–Fort Worth</p>
+      <p>&copy; {year} Trevor Ludwyck Photography</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-black);
+    color: var(--color-cream);
+    padding-block: var(--space-lg) var(--space-md);
+  }
+
+  .site-footer__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__mark {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--color-white);
+  }
+
+  .site-footer__mark span {
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .site-footer__nav a {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-cream);
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+
+  .site-footer__nav a:hover {
+    opacity: 1;
+    color: var(--color-gold);
+  }
+
+  .site-footer__meta {
+    font-size: 0.8rem;
+    opacity: 0.65;
+    text-align: right;
+  }
+
+  .site-footer__meta p {
+    margin-bottom: 0.35rem;
+  }
+
+  @media (max-width: 720px) {
+    .site-footer__wrap {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .site-footer__meta {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+import ResponsiveImage from './ResponsiveImage.astro';
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: GalleryItem[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="gallery">
+  {images.map((image) => (
+    <figure class="gallery__item">
+      <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 900px) 50vw, 100vw" />
+    </figure>
+  ))}
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gutter);
+  }
+
+  .gallery__item {
+    margin: 0;
+  }
+
+  .gallery__item:nth-child(6n + 1),
+  .gallery__item:nth-child(6n + 4) {
+    grid-column: 1 / -1;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 720px) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

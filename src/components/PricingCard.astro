@@ -1,0 +1,82 @@
+---
+interface Props {
+  tier: string;
+  price: string;
+  features: string[];
+  featured?: boolean;
+}
+
+const { tier, price, features, featured = false } = Astro.props;
+---
+
+<div class:list={['pricing-card', featured && 'pricing-card--featured']}>
+  {featured && <p class="eyebrow pricing-card__eyebrow">Signature</p>}
+  <h3 class="pricing-card__tier">{tier}</h3>
+  <p class="pricing-card__price">{price}</p>
+  <ul class="pricing-card__features">
+    {features.map((feature) => (
+      <li>{feature}</li>
+    ))}
+  </ul>
+  <a href="/contact/" class="btn pricing-card__cta">Inquire</a>
+</div>
+
+<style>
+  .pricing-card {
+    border: 1px solid var(--color-border);
+    padding: var(--space-lg) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .pricing-card--featured {
+    border-color: var(--color-gold);
+  }
+
+  .pricing-card__eyebrow {
+    margin-bottom: -0.4rem;
+  }
+
+  .pricing-card__tier {
+    font-size: 1.5rem;
+  }
+
+  .pricing-card__price {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pricing-card__features {
+    list-style: none;
+    margin: 0 0 var(--space-md);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex-grow: 1;
+  }
+
+  .pricing-card__features li {
+    font-size: 0.92rem;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .pricing-card__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--color-gold);
+  }
+
+  .pricing-card__cta {
+    align-self: flex-start;
+  }
+</style>
