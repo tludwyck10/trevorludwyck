@@ -1,61 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ResponsiveImage from '../components/ResponsiveImage.astro';
-import { hero } from '../data/gallery.js';
+import Gallery from '../components/Gallery.astro';
+import { home } from '../data/gallery.js';
 ---
 
 <BaseLayout
   title="Portrait Photography in Celina & Dallas–Fort Worth, TX"
   description="Trevor Ludwyck Photography — portrait photography in Celina, TX, serving Dallas–Fort Worth. Built on deliberate lighting, not high-volume shooting."
-  navVariant="overlay"
 >
-  <section class="hero">
-    <ResponsiveImage src={hero.src} alt={hero.alt} sizes="100vw" priority class="hero__image" />
-    <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="hero__content wrap">
-      <h1>Simple sessions.<br />Considered images.</h1>
-      <a href="/contact/" class="btn btn--on-dark">Inquire</a>
-    </div>
+  <section class="home-gallery wrap">
+    <Gallery images={home} />
   </section>
 </BaseLayout>
 
 <style>
-  .hero {
-    position: relative;
-    height: 100svh;
-    min-height: 560px;
-    overflow: hidden;
-    background: var(--color-black);
-  }
-
-  .hero :global(.hero__image) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero__scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(20, 18, 15, 0.35) 0%, rgba(20, 18, 15, 0.1) 40%, rgba(20, 18, 15, 0.5) 100%);
-  }
-
-  .hero__content {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--space-md);
+  .home-gallery {
+    padding-top: var(--space-lg);
     padding-bottom: var(--space-xl);
-    color: var(--color-white);
-  }
-
-  .hero__content h1 {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    max-width: 16ch;
   }
 </style>

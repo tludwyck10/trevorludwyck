@@ -4,6 +4,7 @@ import ResponsiveImage from './ResponsiveImage.astro';
 interface GalleryItem {
   src: string;
   alt: string;
+  href?: string;
 }
 
 interface Props {
@@ -16,7 +17,13 @@ const { images } = Astro.props;
 <div class="gallery">
   {images.map((image) => (
     <figure class="gallery__item">
-      <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw" />
+      {image.href ? (
+        <a href={image.href} class="gallery__link">
+          <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw" />
+        </a>
+      ) : (
+        <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw" />
+      )}
     </figure>
   ))}
 </div>
@@ -35,6 +42,12 @@ const { images } = Astro.props;
   .gallery__item :global(img) {
     width: 100%;
     height: auto;
+    display: block;
+    transition: opacity 0.2s ease;
+  }
+
+  .gallery__link:hover :global(img) {
+    opacity: 0.85;
   }
 
   @media (max-width: 1000px) {

@@ -23,15 +23,6 @@ function ratioFor(index) {
   return RATIOS[index % RATIOS.length];
 }
 
-// Placeholder hero — a studio portrait (black and white, free Unsplash
-// License, photo by Nik Bagherzadegan: unsplash.com/photos/09O1mBwgSJU).
-// Replace with a real session photo when one's ready; no other change
-// needed since ResponsiveImage already builds a srcset for this host.
-export const hero = {
-  src: 'https://images.unsplash.com/photo-1782144893518-a3b15d098e34?auto=format&fit=crop&q=80&w=2400',
-  alt: 'Placeholder — studio portrait, seated, dramatic low-key lighting',
-};
-
 export const seniors = Array.from({ length: 8 }, (_, i) => {
   const [w, h] = ratioFor(i);
   return { src: placeholder(`tlp-sr-${i + 1}`, w, h), alt: `Placeholder — senior portrait ${i + 1}` };
@@ -50,3 +41,10 @@ export const about = {
 // Single combined Work gallery — interleaved so the page reads as one body
 // of portrait work rather than two categorized sets.
 export const portfolio = seniors.flatMap((image, i) => [image, couples[i]]).filter(Boolean);
+
+// Small curated set for the homepage masonry — distinct seeds from the
+// Work gallery so returning from home to /work/ doesn't repeat images.
+export const home = Array.from({ length: 7 }, (_, i) => {
+  const [w, h] = ratioFor(i + 1);
+  return { src: placeholder(`tlp-home-${i + 1}`, w, h), alt: `Placeholder — portrait ${i + 1}`, href: '/work/' };
+});
