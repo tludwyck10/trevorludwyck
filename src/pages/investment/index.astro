@@ -5,14 +5,15 @@ import PricingCard from '../../components/PricingCard.astro';
 
 <BaseLayout
   title="Investment"
-  description="Senior portrait and couples portrait session pricing for Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
+  description="Pricing for portrait sessions and event coverage from Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
 >
   <section class="page-intro wrap">
     <p class="eyebrow">Investment</p>
     <h1>Simple pricing, two ways to book.</h1>
     <p class="page-intro__copy">
-      No à la carte maze — each session type has two clear tiers. Every
-      package includes an online gallery and downloadable digital images.
+      No à la carte maze — each session type, portrait or event, has two
+      clear tiers. Every package includes an online gallery and
+      downloadable digital images.
     </p>
   </section>
 
@@ -48,6 +49,24 @@ import PricingCard from '../../components/PricingCard.astro';
         features={['2 locations', '90 minute session', 'Digital images', 'Premium print product']}
       />
     </div>
+  </section>
+
+  <section class="pricing-group wrap">
+    <h2 class="pricing-group__title">Moments</h2>
+    <div class="pricing-grid">
+      <PricingCard
+        tier="Essential"
+        price="$450–550"
+        features={['2 hours coverage', 'Travel included (20 mi)', 'Online gallery', 'Digital images']}
+      />
+      <PricingCard
+        tier="Signature"
+        price="$850–1,000"
+        featured
+        features={['4 hours coverage', 'Travel included (30 mi)', 'Online gallery', 'Digital images', 'Premium print product']}
+      />
+    </div>
+    <p class="pricing-note">Travel beyond the included radius: +$75.</p>
   </section>
 
   <section class="page-cta wrap">
@@ -88,6 +107,12 @@ import PricingCard from '../../components/PricingCard.astro';
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
+  }
+
+  .pricing-note {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
   }
 
   .page-cta {
