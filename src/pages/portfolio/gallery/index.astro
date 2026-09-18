@@ -1,22 +1,21 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Gallery from '../../components/Gallery.astro';
-import { portfolio } from '../../data/gallery.js';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Gallery from '../../../components/Gallery.astro';
+import { portfolio } from '../../../data/gallery.js';
 ---
 
 <BaseLayout
-  title="Portrait Photography — Celina & Dallas–Fort Worth, TX"
-  description="Portrait photography in Celina, TX and the Dallas–Fort Worth area. Built on deliberate lighting, not props or trends."
+  title="Portfolio — Celina & Dallas–Fort Worth, TX"
+  description="Portrait photography portfolio — Celina, TX and the Dallas–Fort Worth area. Built on deliberate lighting, not props or trends."
 >
   <section class="page-intro wrap">
-    <p class="eyebrow">Work</p>
+    <p class="eyebrow">Portfolio</p>
     <h1>Portraits, considered.</h1>
     <p class="page-intro__copy">
       Every session starts with the light, not a prop list or a trend.
       What follows is a small set of considered images — built to hold up
       over time.
     </p>
-    <a href="/investment/" class="btn">See Investment</a>
   </section>
 
   <section class="page-gallery wrap">
@@ -43,7 +42,6 @@ import { portfolio } from '../../data/gallery.js';
   .page-intro__copy {
     font-size: 1.05rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-md);
     max-width: 55ch;
   }
 

@@ -8,14 +8,14 @@ const { variant = 'overlay' } = Astro.props;
 const path = Astro.url.pathname;
 
 const links = [
-  { href: '/work/', label: 'Work' },
+  { href: '/portfolio/', label: 'Portfolio' },
   { href: '/investment/', label: 'Investment' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 
 function isActive(href: string) {
-  return path === href;
+  return path === href || path.startsWith(href);
 }
 ---
 

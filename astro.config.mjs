@@ -11,7 +11,8 @@ export default defineConfig({
   integrations: [sitemap()],
 
   redirects: {
-    '/seniors': '/work',
-    '/couples': '/work',
+    '/seniors': '/portfolio/gallery',
+    '/couples': '/portfolio/gallery',
+    '/work': '/portfolio/gallery',
   },
 });

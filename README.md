@@ -13,10 +13,10 @@ Portrait photography site. Built with [Astro](https://astro.build).
 
 ## Project structure
 
-- `src/pages/` — one folder per route (`work/`, `investment/`, `about/`, `contact/`), each with an `index.astro`
+- `src/pages/` — one folder per route (`portfolio/`, `portfolio/gallery/`, `investment/`, `about/`, `contact/`), each with an `index.astro`. `/portfolio/` is a single-image cover page that links into `/portfolio/gallery/`, the actual masonry gallery.
 - `src/components/` — `Nav`, `Footer`, `Gallery`, `ResponsiveImage`, `PricingCard`
 - `src/layouts/BaseLayout.astro` — shared `<head>`, SEO meta tags, nav + footer
-- `src/data/gallery.js` — every image on the site as `{ src, alt }` objects; `seniors` and `couples` are kept as separate arrays for your own file organization, and `portfolio` interleaves them into the single gallery shown on `/work/`
+- `src/data/gallery.js` — every image on the site as `{ src, alt }` objects; `seniors` and `couples` are kept as separate arrays for your own file organization, `portfolio` interleaves them into the gallery shown on `/portfolio/gallery/`, `home` is the curated set on the homepage, and `portfolioCover` is the single hero image on `/portfolio/`
 - `src/styles/global.css` — design tokens (colors, fonts, spacing) and base styles
 
 ## Before launch — things left as placeholders
