@@ -9,6 +9,20 @@ function placeholder(seed, width = 1200, height = 1500) {
   return `https://picsum.photos/seed/${seed}/${width}/${height}?grayscale`;
 }
 
+// Varied aspect ratios so the masonry gallery reads as an editorial mosaic
+// rather than a uniform grid of identical crops. Cycled by index below.
+const RATIOS = [
+  [1400, 1750], // 4:5 portrait
+  [1500, 1500], // square
+  [1350, 1800], // 3:4 portrait
+  [1650, 1100], // 3:2 landscape
+  [1200, 1800], // 2:3 tall portrait
+];
+
+function ratioFor(index) {
+  return RATIOS[index % RATIOS.length];
+}
+
 // Placeholder hero — a studio portrait (black and white, free Unsplash
 // License, photo by Nik Bagherzadegan: unsplash.com/photos/09O1mBwgSJU).
 // Replace with a real session photo when one's ready; no other change
@@ -18,27 +32,15 @@ export const hero = {
   alt: 'Placeholder — studio portrait, seated, dramatic low-key lighting',
 };
 
-export const seniors = [
-  { src: placeholder('tlp-sr-1', 1400, 1750), alt: 'Placeholder — senior portrait 1' },
-  { src: placeholder('tlp-sr-2', 1400, 1750), alt: 'Placeholder — senior portrait 2' },
-  { src: placeholder('tlp-sr-3', 1400, 1750), alt: 'Placeholder — senior portrait 3' },
-  { src: placeholder('tlp-sr-4', 1400, 1750), alt: 'Placeholder — senior portrait 4' },
-  { src: placeholder('tlp-sr-5', 1400, 1750), alt: 'Placeholder — senior portrait 5' },
-  { src: placeholder('tlp-sr-6', 1400, 1750), alt: 'Placeholder — senior portrait 6' },
-  { src: placeholder('tlp-sr-7', 1400, 1750), alt: 'Placeholder — senior portrait 7' },
-  { src: placeholder('tlp-sr-8', 1400, 1750), alt: 'Placeholder — senior portrait 8' },
-];
+export const seniors = Array.from({ length: 8 }, (_, i) => {
+  const [w, h] = ratioFor(i);
+  return { src: placeholder(`tlp-sr-${i + 1}`, w, h), alt: `Placeholder — senior portrait ${i + 1}` };
+});
 
-export const couples = [
-  { src: placeholder('tlp-cp-1', 1400, 1750), alt: 'Placeholder — couples portrait 1' },
-  { src: placeholder('tlp-cp-2', 1400, 1750), alt: 'Placeholder — couples portrait 2' },
-  { src: placeholder('tlp-cp-3', 1400, 1750), alt: 'Placeholder — couples portrait 3' },
-  { src: placeholder('tlp-cp-4', 1400, 1750), alt: 'Placeholder — couples portrait 4' },
-  { src: placeholder('tlp-cp-5', 1400, 1750), alt: 'Placeholder — couples portrait 5' },
-  { src: placeholder('tlp-cp-6', 1400, 1750), alt: 'Placeholder — couples portrait 6' },
-  { src: placeholder('tlp-cp-7', 1400, 1750), alt: 'Placeholder — couples portrait 7' },
-  { src: placeholder('tlp-cp-8', 1400, 1750), alt: 'Placeholder — couples portrait 8' },
-];
+export const couples = Array.from({ length: 8 }, (_, i) => {
+  const [w, h] = ratioFor(i + 2); // offset so interleaved rhythm doesn't repeat seniors' pattern
+  return { src: placeholder(`tlp-cp-${i + 1}`, w, h), alt: `Placeholder — couples portrait ${i + 1}` };
+});
 
 export const about = {
   src: placeholder('tlp-about', 1400, 1750),
