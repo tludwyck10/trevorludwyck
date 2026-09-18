@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PricingCard from '../../components/PricingCard.astro';
+import { pricing } from '../../data/pricing.js';
 ---
 
 <BaseLayout
@@ -13,44 +14,22 @@ import PricingCard from '../../components/PricingCard.astro';
     <p class="page-intro__copy">
       No à la carte maze — each session type, portrait or event, has two
       clear tiers. Every package includes an online gallery and
-      downloadable digital images.
+      downloadable digital images. Not sure which one fits? Use the
+      <a href="/contact/#estimate">estimate calculator</a> on the Contact page.
     </p>
   </section>
 
-  <section class="pricing-group wrap">
-    <h2 class="pricing-group__title">Portraits</h2>
-    <div class="pricing-grid">
-      <PricingCard
-        tier="Essential"
-        price="$550–750"
-        features={['1 location', 'Styled session', 'Online gallery', 'Digital images']}
-      />
-      <PricingCard
-        tier="Signature"
-        price="$1,000–1,500"
-        featured
-        features={['2 locations', 'Styled session', 'Online gallery', 'Digital images', 'Premium print product']}
-      />
-    </div>
-  </section>
-
-  <section class="pricing-group wrap">
-    <h2 class="pricing-group__title">Moments</h2>
-    <div class="pricing-grid">
-      <PricingCard
-        tier="Essential"
-        price="$450–550"
-        features={['2 hours coverage', 'Travel included (20 mi)', 'Online gallery', 'Digital images']}
-      />
-      <PricingCard
-        tier="Signature"
-        price="$850–1,000"
-        featured
-        features={['4 hours coverage', 'Travel included (30 mi)', 'Online gallery', 'Digital images', 'Premium print product']}
-      />
-    </div>
-    <p class="pricing-note">Travel beyond the included radius: +$75.</p>
-  </section>
+  {Object.values(pricing).map((group) => (
+    <section class="pricing-group wrap">
+      <h2 class="pricing-group__title">{group.label}</h2>
+      <div class="pricing-grid">
+        {group.tiers.map((tier) => (
+          <PricingCard tier={tier.name} price={tier.price} featured={tier.featured} features={tier.features} />
+        ))}
+      </div>
+      {group.travelFee && <p class="pricing-note">Travel beyond the included radius: +${group.travelFee}.</p>}
+    </section>
+  ))}
 
   <section class="page-cta wrap">
     <h2>Have questions about a session?</h2>
@@ -73,6 +52,11 @@ import PricingCard from '../../components/PricingCard.astro';
     font-size: 1.05rem;
     color: var(--color-text-muted);
     max-width: 55ch;
+  }
+
+  .page-intro__copy a {
+    color: var(--color-text);
+    text-decoration-color: var(--color-gold);
   }
 
   .pricing-group {

@@ -15,9 +15,10 @@ Photography site — two categories, Portraits and Moments. Built with
 ## Project structure
 
 - `src/pages/` — one folder per route. `/portfolio/` is the category-chooser landing page (two stacked covers: Portraits, Moments), linking into `/portfolio/portraits/` and `/portfolio/moments/`, the actual masonry galleries. Also `investment/`, `about/`, `contact/`.
-- `src/components/` — `Nav`, `Footer`, `Gallery`, `CategoryCover` (the reusable Portraits/Moments cover block), `ResponsiveImage`, `PricingCard`
+- `src/components/` — `Nav`, `Footer`, `Gallery`, `CategoryCover` (the reusable Portraits/Moments cover block), `PricingCalculator` (the estimate tool on `/contact/`), `ResponsiveImage`, `PricingCard`
 - `src/layouts/BaseLayout.astro` — shared `<head>`, SEO meta tags, nav + footer
 - `src/data/gallery.js` — every image on the site as `{ src, alt }` objects. `seniors`/`couples` combine into `portraits` (shown on `/portfolio/portraits/`); `moments` is the events gallery; `portraitsCover`/`momentsCover` are the two cover-page hero images; `home` is the curated homepage set
+- `src/data/pricing.js` — the only place real dollar figures live. Both the Investment page's pricing cards and the Contact page's estimate calculator read from this one file, so a price change only has to happen here.
 - `src/styles/global.css` — design tokens (colors, fonts, spacing) and base styles
 
 ## Before launch — things left as placeholders

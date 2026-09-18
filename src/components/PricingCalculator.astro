@@ -1,0 +1,339 @@
+---
+import { pricing } from '../data/pricing.js';
+
+const categories = Object.entries(pricing);
+---
+
+<div class="calculator" id="calculator">
+  <div class="calculator__row">
+    <p class="calculator__label">What are you booking?</p>
+    <div class="calculator__toggle">
+      {categories.map(([key, group], i) => (
+        <button
+          type="button"
+          class="calculator__toggle-btn"
+          data-category={key}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+        >
+          {group.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {categories.map(([key, group]) => (
+    <div class="calculator__panel" data-category-panel={key} hidden={key !== categories[0][0]}>
+      <p class="calculator__label">Which tier?</p>
+      <div class="calculator__tiers">
+        {group.tiers.map((tier, i) => (
+          <button
+            type="button"
+            class="calculator__tier"
+            data-category={key}
+            data-tier={tier.name}
+            data-price-min={tier.priceMin}
+            data-price-max={tier.priceMax}
+            data-price-text={tier.price}
+            data-travel-radius={tier.travelRadius ?? ''}
+            data-travel-fee={group.travelFee ?? ''}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            <span class="calculator__tier-name">{tier.name}</span>
+            <span class="calculator__tier-price">{tier.price}</span>
+            <ul class="calculator__tier-features">
+              {tier.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </button>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <div class="calculator__row" id="calculator-travel-row" hidden>
+    <label class="calculator__label" for="calculator-distance">Distance from Celina, TX (miles)</label>
+    <input type="number" id="calculator-distance" class="calculator__distance" min="0" inputmode="numeric" placeholder="e.g. 25" />
+  </div>
+
+  <div class="calculator__result">
+    <p class="calculator__result-label">Estimated investment</p>
+    <p class="calculator__result-price" id="calculator-price">$550–750</p>
+    <p class="calculator__result-note" id="calculator-note"></p>
+  </div>
+
+  <button type="button" class="btn btn--gold calculator__cta" id="calculator-cta">Use This Estimate</button>
+</div>
+
+<style>
+  .calculator {
+    border: 1px solid var(--color-border);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .calculator__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .calculator__toggle {
+    display: inline-flex;
+    border: 1px solid var(--color-border);
+  }
+
+  .calculator__toggle-btn {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.65rem 1.4rem;
+    background: var(--color-white);
+    color: var(--color-text);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .calculator__toggle-btn + .calculator__toggle-btn {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .calculator__toggle-btn[aria-pressed='true'] {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .calculator__tiers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .calculator__tier {
+    text-align: left;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    padding: 1.1rem 1.2rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    transition: border-color 0.15s ease;
+  }
+
+  .calculator__tier[aria-pressed='true'] {
+    border-color: var(--color-gold);
+    box-shadow: inset 0 0 0 1px var(--color-gold);
+  }
+
+  .calculator__tier-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .calculator__tier-price {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .calculator__tier-features {
+    list-style: none;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .calculator__tier-features li {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding-left: 0.9rem;
+    position: relative;
+  }
+
+  .calculator__tier-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 5px;
+    height: 1px;
+    background: var(--color-gold);
+  }
+
+  .calculator__distance {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--color-text);
+    width: 160px;
+    max-width: 100%;
+  }
+
+  .calculator__distance:focus {
+    outline: none;
+    border-color: var(--color-gold);
+  }
+
+  .calculator__result {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+  }
+
+  .calculator__result-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .calculator__result-price {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .calculator__result-note {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-top: 0.3rem;
+    min-height: 1.3em;
+  }
+
+  .calculator__cta {
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+    background: var(--color-gold);
+    color: var(--color-black);
+  }
+
+  .calculator__cta:hover {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 560px) {
+    .calculator__tiers {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const root = document.getElementById('calculator');
+  if (root) {
+    const categoryButtons = root.querySelectorAll<HTMLButtonElement>('.calculator__toggle-btn');
+    const panels = root.querySelectorAll<HTMLElement>('[data-category-panel]');
+    const travelRow = document.getElementById('calculator-travel-row') as HTMLElement;
+    const distanceInput = document.getElementById('calculator-distance') as HTMLInputElement;
+    const priceEl = document.getElementById('calculator-price') as HTMLElement;
+    const noteEl = document.getElementById('calculator-note') as HTMLElement;
+    const cta = document.getElementById('calculator-cta') as HTMLButtonElement;
+
+    let activeCategory = categoryButtons[0]?.dataset.category ?? '';
+
+    function getActiveTierButton(): HTMLButtonElement | null {
+      const panel = root!.querySelector<HTMLElement>(`[data-category-panel="${activeCategory}"]`);
+      return panel?.querySelector<HTMLButtonElement>('.calculator__tier[aria-pressed="true"]') ?? null;
+    }
+
+    function recompute() {
+      const tierBtn = getActiveTierButton();
+      if (!tierBtn) return;
+
+      priceEl.textContent = tierBtn.dataset.priceText ?? '';
+
+      const travelRadius = Number(tierBtn.dataset.travelRadius || 0);
+      const travelFee = Number(tierBtn.dataset.travelFee || 0);
+      const hasTravel = tierBtn.dataset.travelRadius !== '';
+
+      if (hasTravel) {
+        travelRow.hidden = false;
+        const distance = Number(distanceInput.value || 0);
+        if (distanceInput.value === '') {
+          noteEl.textContent = `Travel included up to ${travelRadius} mi.`;
+        } else if (distance > travelRadius) {
+          noteEl.textContent = `+ $${travelFee} travel fee (beyond the included ${travelRadius} mi)`;
+        } else {
+          noteEl.textContent = `Travel included — within the ${travelRadius} mi radius.`;
+        }
+      } else {
+        travelRow.hidden = true;
+        noteEl.textContent = '';
+      }
+    }
+
+    categoryButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeCategory = btn.dataset.category ?? '';
+        categoryButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.categoryPanel !== activeCategory;
+        });
+        // default to the first tier of the newly active category
+        const firstTier = getFirstTierButton(activeCategory);
+        panels.forEach((panel) => {
+          panel.querySelectorAll<HTMLButtonElement>('.calculator__tier').forEach((t) => {
+            t.setAttribute('aria-pressed', String(t === firstTier));
+          });
+        });
+        distanceInput.value = '';
+        recompute();
+      });
+    });
+
+    function getFirstTierButton(category: string): HTMLButtonElement | null {
+      const panel = root!.querySelector<HTMLElement>(`[data-category-panel="${category}"]`);
+      return panel?.querySelector<HTMLButtonElement>('.calculator__tier') ?? null;
+    }
+
+    root.querySelectorAll<HTMLButtonElement>('.calculator__tier').forEach((tierBtn) => {
+      tierBtn.addEventListener('click', () => {
+        const panel = tierBtn.closest('[data-category-panel]');
+        panel?.querySelectorAll<HTMLButtonElement>('.calculator__tier').forEach((t) => {
+          t.setAttribute('aria-pressed', String(t === tierBtn));
+        });
+        recompute();
+      });
+    });
+
+    distanceInput?.addEventListener('input', recompute);
+
+    cta?.addEventListener('click', () => {
+      const tierBtn = getActiveTierButton();
+      const categoryLabel = root!.querySelector<HTMLButtonElement>(`.calculator__toggle-btn[aria-pressed="true"]`)?.textContent?.trim() ?? '';
+      if (!tierBtn) return;
+
+      document.dispatchEvent(
+        new CustomEvent('estimate:selected', {
+          detail: {
+            category: activeCategory,
+            categoryLabel,
+            tier: tierBtn.dataset.tier,
+            priceText: tierBtn.dataset.priceText,
+            note: noteEl.textContent,
+          },
+        })
+      );
+
+      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    recompute();
+  }
+</script>

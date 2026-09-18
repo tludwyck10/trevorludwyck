@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PricingCalculator from '../../components/PricingCalculator.astro';
 
 // TODO: replace with your real Formspree endpoint.
 // Sign up free at https://formspree.io, create a form, and swap the ID
@@ -11,18 +12,36 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   title="Contact"
   description="Inquire about a portrait session or event coverage with Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
 >
+  <section class="estimate wrap" id="estimate">
+    <p class="eyebrow">Get an Estimate</p>
+    <h1>Not sure what to expect?</h1>
+    <p class="estimate__copy">
+      Pick a category and tier for a quick price range, then carry it
+      straight into your inquiry below.
+    </p>
+    <PricingCalculator />
+  </section>
+
   <section class="contact wrap">
     <div class="contact__intro">
       <p class="eyebrow">Contact</p>
-      <h1>Let's talk about your session.</h1>
+      <h2>Let's talk about your session.</h2>
       <p>
         Tell me a bit about what you're looking for and I'll follow up by
         email to find a time that works.
       </p>
     </div>
 
-    <form class="contact__form" action={FORMSPREE_ENDPOINT} method="POST">
+    <form class="contact__form" id="contact-form" action={FORMSPREE_ENDPOINT} method="POST">
       <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" />
+      <input type="hidden" name="estimate" id="estimate-field" />
+
+      <div class="contact__estimate-chip" id="estimate-chip" hidden>
+        <p>
+          Estimate: <strong id="estimate-chip-text"></strong>
+        </p>
+        <button type="button" id="estimate-chip-clear">Change</button>
+      </div>
 
       <div class="field">
         <label for="name">Name</label>
@@ -38,8 +57,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
         <label for="session-type">Session type</label>
         <select id="session-type" name="session_type" required>
           <option value="" disabled selected>Select one</option>
-          <option value="Senior Portrait">Senior Portrait</option>
-          <option value="Couples Portrait">Couples Portrait</option>
+          <option value="Portraits">Portraits</option>
           <option value="Moments / Event">Moments / Event</option>
         </select>
       </div>
@@ -65,15 +83,31 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 </BaseLayout>
 
 <style>
+  .estimate {
+    padding-block: calc(var(--space-xl) + 2rem) var(--space-lg);
+    max-width: 760px;
+  }
+
+  .estimate h1 {
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .estimate__copy {
+    color: var(--color-text-muted);
+    max-width: 55ch;
+    margin-bottom: var(--space-md);
+  }
+
   .contact {
-    padding-block: calc(var(--space-xl) + 2rem) var(--space-xl);
+    padding-block: var(--space-lg) var(--space-xl);
     display: grid;
     grid-template-columns: 4fr 8fr;
     gap: var(--space-lg);
     align-items: start;
   }
 
-  .contact__intro h1 {
+  .contact__intro h2 {
     font-size: clamp(2.25rem, 4.5vw, 3rem);
     margin-block: var(--space-sm) var(--space-md);
   }
@@ -88,6 +122,40 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     flex-direction: column;
     gap: var(--space-md);
     max-width: 560px;
+  }
+
+  .contact__estimate-chip[hidden] {
+    display: none;
+  }
+
+  .contact__estimate-chip {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--color-cream);
+    border: 1px solid var(--color-border);
+    padding: 0.85rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  .contact__estimate-chip strong {
+    color: var(--color-text);
+  }
+
+  .contact__estimate-chip button {
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
   }
 
   .field {
@@ -141,3 +209,33 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     }
   }
 </style>
+
+<script>
+  const chip = document.getElementById('estimate-chip') as HTMLElement;
+  const chipText = document.getElementById('estimate-chip-text') as HTMLElement;
+  const chipClear = document.getElementById('estimate-chip-clear') as HTMLButtonElement;
+  const estimateField = document.getElementById('estimate-field') as HTMLInputElement;
+  const sessionType = document.getElementById('session-type') as HTMLSelectElement;
+
+  document.addEventListener('estimate:selected', (event) => {
+    const detail = (event as CustomEvent).detail;
+    const summary = `${detail.categoryLabel} — ${detail.tier} (${detail.priceText}${detail.note ? `, ${detail.note}` : ''})`;
+
+    chipText.textContent = summary;
+    chip.hidden = false;
+    estimateField.value = summary;
+
+    if (detail.category === 'portraits') {
+      sessionType.value = 'Portraits';
+    } else if (detail.category === 'moments') {
+      sessionType.value = 'Moments / Event';
+    }
+  });
+
+  chipClear?.addEventListener('click', () => {
+    chip.hidden = true;
+    estimateField.value = '';
+    sessionType.value = '';
+    document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
