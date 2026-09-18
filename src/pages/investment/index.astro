@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PricingCard from '../../components/PricingCard.astro';
+import PricingCalculator from '../../components/PricingCalculator.astro';
 import { pricing } from '../../data/pricing.js';
 ---
 
@@ -14,8 +15,7 @@ import { pricing } from '../../data/pricing.js';
     <p class="page-intro__copy">
       No à la carte maze — each session type, portrait or event, has two
       clear tiers. Every package includes an online gallery and
-      downloadable digital images. Not sure which one fits? Use the
-      <a href="/contact/#estimate">estimate calculator</a> on the Contact page.
+      downloadable digital images.
     </p>
   </section>
 
@@ -31,9 +31,14 @@ import { pricing } from '../../data/pricing.js';
     </section>
   ))}
 
-  <section class="page-cta wrap">
-    <h2>Have questions about a session?</h2>
-    <a href="/contact/" class="btn btn--gold">Inquire</a>
+  <section class="estimate wrap">
+    <p class="eyebrow">Get an Estimate</p>
+    <h2>Not sure what to expect?</h2>
+    <p class="estimate__copy">
+      Pick a category and tier for a quick price range, then carry it
+      straight into your inquiry.
+    </p>
+    <PricingCalculator />
   </section>
 </BaseLayout>
 
@@ -52,11 +57,6 @@ import { pricing } from '../../data/pricing.js';
     font-size: 1.05rem;
     color: var(--color-text-muted);
     max-width: 55ch;
-  }
-
-  .page-intro__copy a {
-    color: var(--color-text);
-    text-decoration-color: var(--color-gold);
   }
 
   .pricing-group {
@@ -82,13 +82,19 @@ import { pricing } from '../../data/pricing.js';
     margin-top: var(--space-sm);
   }
 
-  .page-cta {
-    padding-block: var(--space-md) var(--space-xl);
-    text-align: center;
+  .estimate {
+    padding-bottom: var(--space-xl);
+    max-width: 760px;
   }
 
-  .page-cta h2 {
+  .estimate h2 {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .estimate__copy {
+    color: var(--color-text-muted);
+    max-width: 55ch;
     margin-bottom: var(--space-md);
   }
 

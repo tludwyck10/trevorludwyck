@@ -319,19 +319,12 @@ const categories = Object.entries(pricing);
       const categoryLabel = root!.querySelector<HTMLButtonElement>(`.calculator__toggle-btn[aria-pressed="true"]`)?.textContent?.trim() ?? '';
       if (!tierBtn) return;
 
-      document.dispatchEvent(
-        new CustomEvent('estimate:selected', {
-          detail: {
-            category: activeCategory,
-            categoryLabel,
-            tier: tierBtn.dataset.tier,
-            priceText: tierBtn.dataset.priceText,
-            note: noteEl.textContent,
-          },
-        })
-      );
+      const note = noteEl.textContent ?? '';
+      const summary = `${categoryLabel} — ${tierBtn.dataset.tier} (${tierBtn.dataset.priceText}${note ? `, ${note}` : ''})`;
+      const sessionType = activeCategory === 'portraits' ? 'Portraits' : 'Moments / Event';
 
-      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const params = new URLSearchParams({ estimate: summary, session: sessionType });
+      window.location.href = `/contact/?${params.toString()}`;
     });
 
     recompute();

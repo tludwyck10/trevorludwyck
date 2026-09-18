@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PricingCalculator from '../../components/PricingCalculator.astro';
 
 // TODO: replace with your real Formspree endpoint.
 // Sign up free at https://formspree.io, create a form, and swap the ID
@@ -12,23 +11,15 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   title="Contact"
   description="Inquire about a portrait session or event coverage with Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
 >
-  <section class="estimate wrap" id="estimate">
-    <p class="eyebrow">Get an Estimate</p>
-    <h1>Not sure what to expect?</h1>
-    <p class="estimate__copy">
-      Pick a category and tier for a quick price range, then carry it
-      straight into your inquiry below.
-    </p>
-    <PricingCalculator />
-  </section>
-
   <section class="contact wrap">
     <div class="contact__intro">
       <p class="eyebrow">Contact</p>
-      <h2>Let's talk about your session.</h2>
+      <h1>Let's talk about your session.</h1>
       <p>
         Tell me a bit about what you're looking for and I'll follow up by
-        email to find a time that works.
+        email to find a time that works. Want a price range first? Use the
+        <a href="/investment/#calculator">estimate calculator</a> on the
+        Investment page.
       </p>
     </div>
 
@@ -40,7 +31,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
         <p>
           Estimate: <strong id="estimate-chip-text"></strong>
         </p>
-        <button type="button" id="estimate-chip-clear">Change</button>
+        <a href="/investment/#calculator">Change</a>
       </div>
 
       <div class="field">
@@ -83,31 +74,15 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 </BaseLayout>
 
 <style>
-  .estimate {
-    padding-block: calc(var(--space-xl) + 2rem) var(--space-lg);
-    max-width: 760px;
-  }
-
-  .estimate h1 {
-    font-size: clamp(2rem, 4.5vw, 2.75rem);
-    margin-block: var(--space-sm) var(--space-md);
-  }
-
-  .estimate__copy {
-    color: var(--color-text-muted);
-    max-width: 55ch;
-    margin-bottom: var(--space-md);
-  }
-
   .contact {
-    padding-block: var(--space-lg) var(--space-xl);
+    padding-block: calc(var(--space-xl) + 2rem) var(--space-xl);
     display: grid;
     grid-template-columns: 4fr 8fr;
     gap: var(--space-lg);
     align-items: start;
   }
 
-  .contact__intro h2 {
+  .contact__intro h1 {
     font-size: clamp(2.25rem, 4.5vw, 3rem);
     margin-block: var(--space-sm) var(--space-md);
   }
@@ -115,6 +90,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   .contact__intro p {
     color: var(--color-text-muted);
     max-width: 40ch;
+  }
+
+  .contact__intro p a {
+    color: var(--color-text);
+    text-decoration-color: var(--color-gold);
   }
 
   .contact__form {
@@ -143,18 +123,13 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     color: var(--color-text);
   }
 
-  .contact__estimate-chip button {
-    background: none;
-    border: none;
+  .contact__estimate-chip a {
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
-    text-decoration: underline;
-    cursor: pointer;
-    padding: 0;
     flex-shrink: 0;
   }
 
@@ -213,29 +188,20 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 <script>
   const chip = document.getElementById('estimate-chip') as HTMLElement;
   const chipText = document.getElementById('estimate-chip-text') as HTMLElement;
-  const chipClear = document.getElementById('estimate-chip-clear') as HTMLButtonElement;
   const estimateField = document.getElementById('estimate-field') as HTMLInputElement;
   const sessionType = document.getElementById('session-type') as HTMLSelectElement;
 
-  document.addEventListener('estimate:selected', (event) => {
-    const detail = (event as CustomEvent).detail;
-    const summary = `${detail.categoryLabel} — ${detail.tier} (${detail.priceText}${detail.note ? `, ${detail.note}` : ''})`;
+  const params = new URLSearchParams(window.location.search);
+  const estimate = params.get('estimate');
+  const session = params.get('session');
 
-    chipText.textContent = summary;
+  if (estimate) {
+    chipText.textContent = estimate;
     chip.hidden = false;
-    estimateField.value = summary;
+    estimateField.value = estimate;
+  }
 
-    if (detail.category === 'portraits') {
-      sessionType.value = 'Portraits';
-    } else if (detail.category === 'moments') {
-      sessionType.value = 'Moments / Event';
-    }
-  });
-
-  chipClear?.addEventListener('click', () => {
-    chip.hidden = true;
-    estimateField.value = '';
-    sessionType.value = '';
-    document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  if (session === 'Portraits' || session === 'Moments / Event') {
+    sessionType.value = session;
+  }
 </script>
