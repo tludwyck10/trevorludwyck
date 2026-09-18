@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Gallery from '../../../components/Gallery.astro';
+import { portraits } from '../../../data/gallery.js';
+---
+
+<BaseLayout
+  title="Portraits — Celina & Dallas–Fort Worth, TX"
+  description="Senior and couples portrait photography — Celina, TX and the Dallas–Fort Worth area. Built on deliberate lighting, not props or trends."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">Portraits</p>
+    <h1>Portraits, considered.</h1>
+    <p class="page-intro__copy">
+      Every session starts with the light, not a prop list or a trend.
+      What follows is a small set of considered images — built to hold up
+      over time.
+    </p>
+  </section>
+
+  <section class="page-gallery wrap">
+    <Gallery images={portraits} />
+  </section>
+
+  <section class="page-cta wrap">
+    <h2>Ready to plan a session?</h2>
+    <a href="/contact/" class="btn btn--gold">Inquire</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-block: calc(var(--space-xl) + 2rem) var(--space-lg);
+    max-width: 680px;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .page-intro__copy {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 55ch;
+  }
+
+  .page-gallery {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-cta {
+    padding-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .page-cta h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+</style>

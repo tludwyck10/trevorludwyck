@@ -1,126 +1,34 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ResponsiveImage from '../../components/ResponsiveImage.astro';
-import { portfolioCover } from '../../data/gallery.js';
+import CategoryCover from '../../components/CategoryCover.astro';
+import { portraitsCover, momentsCover } from '../../data/gallery.js';
 ---
 
 <BaseLayout
   title="Portfolio"
-  description="Trevor Ludwyck Photography portfolio — portrait sessions in Celina, TX and the Dallas–Fort Worth area."
+  description="Trevor Ludwyck Photography portfolio — portrait sessions and event coverage in Celina, TX and the Dallas–Fort Worth area."
 >
-  <section class="cover wrap">
-    <h1 class="cover__title">Portraits</h1>
+  <h1 class="visually-hidden">Portfolio</h1>
 
-    <a href="/portfolio/gallery/" class="cover__frame" aria-label="View the portfolio gallery">
-      <div class="cover__photo">
-        <ResponsiveImage src={portfolioCover.src} alt={portfolioCover.alt} sizes="(min-width: 900px) 900px, 100vw" priority />
-        <p class="cover__label">Portrait Photography</p>
-      </div>
-    </a>
+  <CategoryCover
+    title="Portraits"
+    label="Portrait Photography"
+    line="Portraits, considered."
+    copy="Every session starts with the light, not a prop list or a trend. What follows is a small, considered set of images."
+    href="/portfolio/portraits/"
+    imageSrc={portraitsCover.src}
+    imageAlt={portraitsCover.alt}
+    priority
+  />
 
-    <div class="cover__foot">
-      <p class="cover__line">Portraits, considered.</p>
-      <p class="cover__copy">
-        Every session starts with the light, not a prop list or a trend.
-        What follows is a small, considered set of images.
-      </p>
-      <a href="/portfolio/gallery/" class="cover__cta">View the Gallery <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </section>
+  <CategoryCover
+    title="Moments"
+    label="Event Photography"
+    line="Moments, kept."
+    copy="Coverage for the parts of an event that actually matter — the toasts, the reactions, the room. Built around light, not a checklist."
+    href="/portfolio/moments/"
+    imageSrc={momentsCover.src}
+    imageAlt={momentsCover.alt}
+    grayscaleImage
+  />
 </BaseLayout>
-
-<style>
-  .cover {
-    padding-block: calc(var(--space-xl) + 1rem) var(--space-xl);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .cover__title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-black);
-    font-size: clamp(3rem, 9vw, 6.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-md);
-  }
-
-  .cover__frame {
-    display: block;
-    width: 100%;
-    max-width: 800px;
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    padding: clamp(10px, 1.8vw, 22px);
-    text-decoration: none;
-  }
-
-  .cover__photo {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-    background: var(--color-black);
-  }
-
-  .cover__photo :global(img) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .cover__frame:hover .cover__photo :global(img) {
-    transform: scale(1.02);
-  }
-
-  .cover__label {
-    position: absolute;
-    top: clamp(1rem, 3vw, 2rem);
-    left: 0;
-    right: 0;
-    margin: 0;
-    text-align: center;
-    color: var(--color-white);
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: 0.9rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-  }
-
-  .cover__foot {
-    max-width: 480px;
-    margin-top: var(--space-lg);
-  }
-
-  .cover__line {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    margin-bottom: var(--space-sm);
-  }
-
-  .cover__copy {
-    color: var(--color-text-muted);
-    font-size: 0.98rem;
-    margin-bottom: var(--space-md);
-  }
-
-  .cover__cta {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--color-black);
-    border-bottom: 1px solid var(--color-gold);
-    padding-bottom: 0.3rem;
-  }
-</style>
