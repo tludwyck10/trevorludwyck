@@ -1,6 +1,6 @@
 // PLACEHOLDER IMAGES
 // Each entry's `src` points to a picsum.photos placeholder. To drop in real
-// photography later, replace `src` with a local path (e.g. "/images/seniors/01.jpg")
+// photography later, replace `src` with a local path (e.g. "/images/portraits/01.jpg")
 // placed in /public/images/ — the gallery/hero components don't need to change.
 // `alt` text is a placeholder too; write real descriptive alt text per image
 // when actual photos are added.
@@ -11,14 +11,14 @@ function placeholder(seed, width = 1200, height = 1500) {
 
 export const hero = {
   src: placeholder('tlp-hero', 2400, 1600),
-  alt: 'Placeholder — editorial portrait hero image',
+  alt: 'Placeholder — portrait hero image',
 };
 
 export const featured = [
-  { src: placeholder('tlp-feat-1', 1200, 1500), alt: 'Placeholder — senior portrait, natural light', href: '/seniors/', caption: 'Seniors' },
-  { src: placeholder('tlp-feat-2', 1200, 1500), alt: 'Placeholder — couples portrait, golden hour', href: '/couples/', caption: 'Couples' },
-  { src: placeholder('tlp-feat-3', 1200, 1500), alt: 'Placeholder — senior portrait, studio light', href: '/seniors/', caption: 'Seniors' },
-  { src: placeholder('tlp-feat-4', 1200, 1500), alt: 'Placeholder — couples portrait, editorial', href: '/couples/', caption: 'Couples' },
+  { src: placeholder('tlp-feat-1', 1200, 1500), alt: 'Placeholder — portrait, natural light', href: '/work/' },
+  { src: placeholder('tlp-feat-2', 1200, 1500), alt: 'Placeholder — portrait, golden hour', href: '/work/' },
+  { src: placeholder('tlp-feat-3', 1200, 1500), alt: 'Placeholder — portrait, studio light', href: '/work/' },
+  { src: placeholder('tlp-feat-4', 1200, 1500), alt: 'Placeholder — portrait, natural light', href: '/work/' },
 ];
 
 export const seniors = [
@@ -47,3 +47,7 @@ export const about = {
   src: placeholder('tlp-about', 1400, 1750),
   alt: 'Placeholder — portrait of Trevor Ludwyck',
 };
+
+// Single combined Work gallery — interleaved so the page reads as one body
+// of portrait work rather than two categorized sets.
+export const portfolio = seniors.flatMap((image, i) => [image, couples[i]]).filter(Boolean);

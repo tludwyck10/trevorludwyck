@@ -1,27 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Gallery from '../../components/Gallery.astro';
-import { seniors } from '../../data/gallery.js';
+import { portfolio } from '../../data/gallery.js';
 ---
 
 <BaseLayout
-  title="Senior Portraits — Celina & Dallas–Fort Worth, TX"
-  description="Editorial senior portraits in Celina, TX and the Dallas–Fort Worth area. Timeless, not trendy — built on deliberate lighting, not props or trends."
+  title="Portrait Photography — Celina & Dallas–Fort Worth, TX"
+  description="Portrait photography in Celina, TX and the Dallas–Fort Worth area. Built on deliberate lighting, not props or trends."
 >
   <section class="page-intro wrap">
-    <p class="eyebrow">Senior Portraits</p>
-    <h1>Timeless, not trendy.</h1>
+    <p class="eyebrow">Work</p>
+    <h1>Portraits, considered.</h1>
     <p class="page-intro__copy">
-      Senior portraits shouldn't chase a look that fades with the year. Each
-      session is built around light and your senior — not a trend board.
-      The result is a set of images that will read the same in twenty years
-      as they do today.
+      Every session starts with the light, not a prop list or a trend.
+      What follows is a small set of considered images — built to hold up
+      over time.
     </p>
     <a href="/investment/" class="btn">See Investment</a>
   </section>
 
   <section class="page-gallery wrap">
-    <Gallery images={seniors} />
+    <Gallery images={portfolio} />
   </section>
 
   <section class="page-cta wrap">

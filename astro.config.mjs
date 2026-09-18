@@ -9,4 +9,9 @@ export default defineConfig({
   site: 'https://trevorludwyckphotography.com',
 
   integrations: [sitemap()],
+
+  redirects: {
+    '/seniors': '/work',
+    '/couples': '/work',
+  },
 });

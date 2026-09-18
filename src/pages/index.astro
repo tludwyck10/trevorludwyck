@@ -5,15 +5,15 @@ import { hero, featured } from '../data/gallery.js';
 ---
 
 <BaseLayout
-  title="Editorial Portraits in Celina & Dallas–Fort Worth, TX"
-  description="Trevor Ludwyck Photography — editorial senior portraits and couples portraiture in Celina, TX, serving Dallas–Fort Worth. Built on deliberate lighting, not high-volume shooting."
+  title="Portrait Photography in Celina & Dallas–Fort Worth, TX"
+  description="Trevor Ludwyck Photography — portrait photography in Celina, TX, serving Dallas–Fort Worth. Built on deliberate lighting, not high-volume shooting."
   navVariant="overlay"
 >
   <section class="hero">
     <ResponsiveImage src={hero.src} alt={hero.alt} sizes="100vw" priority class="hero__image" />
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__content wrap">
-      <h1>Editorial portraits,<br />built on light.</h1>
+      <h1>Simple sessions.<br />Considered images.</h1>
       <a href="/contact/" class="btn btn--on-dark">Inquire</a>
     </div>
   </section>
@@ -21,10 +21,9 @@ import { hero, featured } from '../data/gallery.js';
   <section class="intro wrap">
     <p class="eyebrow">Celina, TX — Dallas–Fort Worth</p>
     <p class="intro__copy">
-      Every session starts with the light, not a prop list. The result is a small
-      set of considered images rather than a folder of near-duplicates —
-      portraits that hold up years from now. Two specialties, shot the same
-      deliberate way: senior portraits, and couples portraiture.
+      Every session starts with the light, not a prop list. The result is a
+      small set of considered images rather than a folder of
+      near-duplicates — portraits that hold up years from now.
     </p>
   </section>
 
@@ -33,13 +32,11 @@ import { hero, featured } from '../data/gallery.js';
       {featured.map((image) => (
         <a href={image.href} class="preview__item">
           <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 900px) 25vw, 50vw" />
-          <span class="preview__caption">{image.caption}</span>
         </a>
       ))}
     </div>
     <div class="preview__links">
-      <a href="/seniors/" class="btn">View Senior Portraits</a>
-      <a href="/couples/" class="btn">View Couples Portraits</a>
+      <a href="/work/" class="btn">View the Work</a>
     </div>
   </section>
 </BaseLayout>
@@ -122,18 +119,6 @@ import { hero, featured } from '../data/gallery.js';
 
   .preview__item:hover :global(img) {
     transform: scale(1.04);
-  }
-
-  .preview__caption {
-    position: absolute;
-    left: 0.75rem;
-    bottom: 0.75rem;
-    color: var(--color-white);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: rgba(20, 18, 15, 0.55);
-    padding: 0.35rem 0.6rem;
   }
 
   .preview__links {

@@ -1,7 +1,6 @@
 # Trevor Ludwyck Photography
 
-Editorial portrait photography site — senior portraits and couples
-portraiture only. Built with [Astro](https://astro.build).
+Portrait photography site. Built with [Astro](https://astro.build).
 
 ## Commands
 
@@ -14,10 +13,10 @@ portraiture only. Built with [Astro](https://astro.build).
 
 ## Project structure
 
-- `src/pages/` — one folder per route (`seniors/`, `couples/`, `investment/`, `about/`, `contact/`), each with an `index.astro`
+- `src/pages/` — one folder per route (`work/`, `investment/`, `about/`, `contact/`), each with an `index.astro`
 - `src/components/` — `Nav`, `Footer`, `Gallery`, `ResponsiveImage`, `PricingCard`
 - `src/layouts/BaseLayout.astro` — shared `<head>`, SEO meta tags, nav + footer
-- `src/data/gallery.js` — every image on the site (hero, homepage preview, seniors gallery, couples gallery, about portrait) as a single list of `{ src, alt }` objects
+- `src/data/gallery.js` — every image on the site as `{ src, alt }` objects; `seniors` and `couples` are kept as separate arrays for your own file organization, and `portfolio` interleaves them into the single gallery shown on `/work/`
 - `src/styles/global.css` — design tokens (colors, fonts, spacing) and base styles
 
 ## Before launch — things left as placeholders
@@ -26,7 +25,7 @@ portraiture only. Built with [Astro](https://astro.build).
    through `src/data/gallery.js`. To swap in real photography:
    - Drop files into `public/images/...`
    - Change each entry's `src` in `gallery.js` to the local path (e.g.
-     `/images/seniors/01.jpg`)
+     `/images/portraits/01.jpg`)
    - Once real local images are in use, switch `ResponsiveImage.astro` to
      Astro's built-in `<Image>` (`astro:assets`) for real image
      optimization/resizing — the picsum srcset logic in that component is
