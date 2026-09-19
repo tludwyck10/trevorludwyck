@@ -7,7 +7,7 @@ import couple03 from '../assets/images/portraits/couple-03.jpg';
 import moment01 from '../assets/images/moments/moment-01.jpg';
 import moment02 from '../assets/images/moments/moment-02.jpg';
 import moment03 from '../assets/images/moments/moment-03.jpg';
-import trevorHeadshot from '../assets/images/about/trevor-headshot.jpg';
+import trevorHeadshot from '../assets/images/about/trevor-headshot.webp';
 
 // PLACEHOLDER IMAGES — only used where real photos don't exist yet
 // (currently: senior portraits). Once real session photos are ready,
