@@ -14,5 +14,10 @@ export default defineConfig({
     '/couples': '/portfolio/portraits',
     '/work': '/portfolio/portraits',
     '/portfolio/gallery': '/portfolio/portraits',
+    // Investment page paused for now — send visitors straight to Contact
+    // instead. Un-hide by renaming src/pages/_investment back to
+    // src/pages/investment and removing this redirect + the nav/footer
+    // links in Nav.astro and Footer.astro.
+    '/investment': '/contact',
   },
 });

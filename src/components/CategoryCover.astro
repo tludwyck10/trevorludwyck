@@ -5,15 +5,13 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   title: string;
   label: string;
-  line: string;
-  copy: string;
   href: string;
   imageSrc: string | ImageMetadata;
   imageAlt: string;
   priority?: boolean;
 }
 
-const { title, label, line, copy, href, imageSrc, imageAlt, priority = false } = Astro.props;
+const { title, label, href, imageSrc, imageAlt, priority = false } = Astro.props;
 ---
 
 <section class="cover wrap">
@@ -32,8 +30,6 @@ const { title, label, line, copy, href, imageSrc, imageAlt, priority = false } =
   </a>
 
   <div class="cover__foot">
-    <p class="cover__line">{line}</p>
-    <p class="cover__copy">{copy}</p>
     <a href={href} class="cover__cta">View the Gallery <span aria-hidden="true">&rarr;</span></a>
   </div>
 </section>
@@ -104,20 +100,7 @@ const { title, label, line, copy, href, imageSrc, imageAlt, priority = false } =
   }
 
   .cover__foot {
-    max-width: 480px;
     margin-top: var(--space-lg);
-  }
-
-  .cover__line {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    margin-bottom: var(--space-sm);
-  }
-
-  .cover__copy {
-    color: var(--color-text-muted);
-    font-size: 0.98rem;
-    margin-bottom: var(--space-md);
   }
 
   .cover__cta {
