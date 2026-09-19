@@ -59,7 +59,7 @@ function buildSrcSet(url: string) {
     src={src}
     alt={alt}
     sizes={sizes}
-    widths={widths}
+    widths={widths.filter((w) => w <= src.width).length ? widths.filter((w) => w <= src.width) : [src.width]}
     format="webp"
     quality={82}
     class={className}
