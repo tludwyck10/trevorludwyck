@@ -321,7 +321,7 @@ const categories = Object.entries(pricing);
 
       const note = noteEl.textContent ?? '';
       const summary = `${categoryLabel} — ${tierBtn.dataset.tier} (${tierBtn.dataset.priceText}${note ? `, ${note}` : ''})`;
-      const sessionType = activeCategory === 'portraits' ? 'Portraits' : 'Moments / Event';
+      const sessionType = activeCategory === 'portraits' ? 'Portraits' : 'Moments';
 
       const params = new URLSearchParams({ estimate: summary, session: sessionType });
       window.location.href = `/contact/?${params.toString()}`;

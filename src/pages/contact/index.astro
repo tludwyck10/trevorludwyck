@@ -47,18 +47,76 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
         <select id="session-type" name="session_type" required>
           <option value="" disabled selected>Select one</option>
           <option value="Portraits">Portraits</option>
-          <option value="Moments / Event">Moments / Event</option>
+          <option value="Moments">Moments</option>
         </select>
       </div>
 
-      <div class="field">
-        <label for="date-flexibility">Date flexibility</label>
-        <input
-          type="text"
-          id="date-flexibility"
-          name="date_flexibility"
-          placeholder="e.g. flexible within October, or a specific date"
-        />
+      <div class="field-group" id="portrait-fields" hidden>
+        <div class="field">
+          <label for="portrait-type">Portrait type</label>
+          <select id="portrait-type" name="portrait_type" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="Senior">Senior</option>
+            <option value="Couple">Couple</option>
+            <option value="Engagement">Engagement</option>
+            <option value="Professional">Professional</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="portrait-date">Date <span class="field__optional">(optional)</span></label>
+            <input type="date" id="portrait-date" name="session_date" />
+          </div>
+          <div class="field">
+            <label for="portrait-start-time">Start time</label>
+            <input type="time" id="portrait-start-time" name="start_time" />
+          </div>
+          <div class="field">
+            <label for="portrait-end-time">End time</label>
+            <input type="time" id="portrait-end-time" name="end_time" />
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group" id="moments-fields" hidden>
+        <div class="field">
+          <label for="event-type">Event type</label>
+          <select id="event-type" name="event_type" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Rehearsal Dinner">Rehearsal Dinner</option>
+            <option value="Reception">Reception</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="event-hours">Hours of coverage</label>
+            <input type="number" id="event-hours" name="event_hours" min="1" step="0.5" placeholder="e.g. 4" />
+          </div>
+          <div class="field">
+            <label for="event-location">Event location</label>
+            <input type="text" id="event-location" name="event_location" placeholder="Venue name or city" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="event-date">Date <span class="field__optional">(optional)</span></label>
+            <input type="date" id="event-date" name="session_date" />
+          </div>
+          <div class="field">
+            <label for="event-start-time">Start time</label>
+            <input type="time" id="event-start-time" name="start_time" />
+          </div>
+          <div class="field">
+            <label for="event-end-time">End time</label>
+            <input type="time" id="event-end-time" name="end_time" />
+          </div>
+        </div>
       </div>
 
       <div class="field">
@@ -139,6 +197,13 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     color: var(--color-text-muted);
   }
 
+  .field__optional {
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    opacity: 0.75;
+  }
+
   .field input,
   .field select,
   .field textarea {
@@ -156,6 +221,25 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   .field textarea:focus {
     outline: none;
     border-color: var(--color-gold);
+  }
+
+  .field-group[hidden] {
+    display: none;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--color-cream);
+    border: 1px solid var(--color-border);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-sm);
   }
 
   .contact__form .btn {
@@ -183,6 +267,23 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   const chipText = document.getElementById('estimate-chip-text') as HTMLElement;
   const estimateField = document.getElementById('estimate-field') as HTMLInputElement;
   const sessionType = document.getElementById('session-type') as HTMLSelectElement;
+  const portraitFields = document.getElementById('portrait-fields') as HTMLElement;
+  const momentsFields = document.getElementById('moments-fields') as HTMLElement;
+
+  function setGroupActive(group: HTMLElement, active: boolean) {
+    group.hidden = !active;
+    group.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select').forEach((el) => {
+      el.disabled = !active;
+    });
+  }
+
+  function syncFieldGroups() {
+    setGroupActive(portraitFields, sessionType.value === 'Portraits');
+    setGroupActive(momentsFields, sessionType.value === 'Moments');
+  }
+
+  sessionType.addEventListener('change', syncFieldGroups);
+  syncFieldGroups();
 
   const params = new URLSearchParams(window.location.search);
   const estimate = params.get('estimate');
@@ -194,7 +295,8 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
     estimateField.value = estimate;
   }
 
-  if (session === 'Portraits' || session === 'Moments / Event') {
+  if (session === 'Portraits' || session === 'Moments') {
     sessionType.value = session;
+    syncFieldGroups();
   }
 </script>
