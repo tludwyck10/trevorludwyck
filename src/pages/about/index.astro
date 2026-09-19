@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
-import { about } from '../../data/gallery.js';
+import { about, pillars } from '../../data/gallery.js';
 ---
 
 <BaseLayout
@@ -31,6 +31,112 @@ import { about } from '../../data/gallery.js';
         the belief that real skill shows up as efficiency, not excess.
       </p>
       <a href="/contact/" class="btn">Inquire</a>
+    </div>
+  </section>
+
+  <section class="pillars wrap">
+    <p class="eyebrow">Philosophy</p>
+    <h2>My Three Pillars</h2>
+    <p class="pillars__intro">
+      Vision changes how you approach everything — including a camera.
+      These are the three ideas that shape the way I see, and the way I
+      shoot.
+    </p>
+
+    <div class="pillars__list">
+      <details class="pillar">
+        <summary class="pillar__summary">
+          <span class="pillar__name">Light</span>
+          <span class="pillar__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="pillar__content">
+          <ResponsiveImage
+            src={pillars.light.src}
+            alt={pillars.light.alt}
+            sizes="(min-width: 700px) 500px, 100vw"
+            class="pillar__image"
+          />
+          <div class="pillar__text">
+            <p class="pillar__verse">
+              Genesis 1:3 — "And God said, 'Let there be light,' and there
+              was light."
+            </p>
+            <p>
+              Light is the first thing God ever created — and it's the
+              first thing I think about on every session. Photography was
+              never really about capturing photos to me. It's about
+              capturing and shaping light to narrate the story I'm trying
+              to tell.
+            </p>
+            <p>
+              Where the light falls, what it reveals, what it leaves in
+              shadow — that's the actual craft. The camera, the lens, the
+              location: all of it just serves the light.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="pillar">
+        <summary class="pillar__summary">
+          <span class="pillar__name">Contrast</span>
+          <span class="pillar__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="pillar__content">
+          <ResponsiveImage
+            src={pillars.contrast.src}
+            alt={pillars.contrast.alt}
+            sizes="(min-width: 700px) 500px, 100vw"
+            class={pillars.contrast.grayscale ? 'pillar__image pillar__image--grayscale' : 'pillar__image'}
+          />
+          <div class="pillar__text">
+            <p>
+              Contrast is the ingredient behind anything that's genuinely
+              good. A painting needs light against dark to have depth. A
+              dish needs something acidic against something rich, or sweet
+              against salt, to actually taste like anything. A scent falls
+              flat without a top note working against a base note.
+            </p>
+            <p>
+              Photography runs on the same rule. Without contrast — in
+              light, in tone, in composition — an image goes flat too.
+              Contrast is what gives a photograph depth, weight, and a
+              reason to look twice.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="pillar">
+        <summary class="pillar__summary">
+          <span class="pillar__name">Simplicity</span>
+          <span class="pillar__icon" aria-hidden="true"></span>
+        </summary>
+        <div class="pillar__content">
+          <ResponsiveImage
+            src={pillars.simplicity.src}
+            alt={pillars.simplicity.alt}
+            sizes="(min-width: 700px) 500px, 100vw"
+            class="pillar__image"
+          />
+          <div class="pillar__text">
+            <p>
+              I believe true skill is found in finishing a task the
+              easiest, most efficient way possible — not in making the
+              task itself easy. Take CrossFit: the best athletes in the
+              world aren't the best because they've figured out how to
+              make CrossFit easy. They've found the most efficient way to
+              do something that's still genuinely hard.
+            </p>
+            <p>
+              It's the same behind a camera. Less is always more — fewer
+              props, fewer poses, fewer distractions. The skill was never
+              in the complexity. It's in knowing exactly what to leave
+              out.
+            </p>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 </BaseLayout>
@@ -68,6 +174,133 @@ import { about } from '../../data/gallery.js';
 
   @media (max-width: 900px) {
     .about {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pillars {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pillars h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .pillars__intro {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .pillars__list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pillar {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pillar__summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: var(--space-md);
+  }
+
+  .pillar__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .pillar__summary::marker {
+    content: '';
+  }
+
+  .pillar__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+
+  .pillar__icon {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .pillar__icon::before,
+  .pillar__icon::after {
+    content: '';
+    position: absolute;
+    background: var(--color-gold);
+  }
+
+  .pillar__icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+
+  .pillar__icon::after {
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    transform: translateX(-50%);
+    transition: opacity 0.15s ease;
+  }
+
+  details[open] .pillar__icon::after {
+    opacity: 0;
+  }
+
+  .pillar__content {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: var(--space-lg);
+    align-items: start;
+    padding-bottom: var(--space-lg);
+  }
+
+  .pillar__content :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .pillar__content :global(img.pillar__image--grayscale) {
+    filter: grayscale(1);
+  }
+
+  .pillar__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    color: var(--color-text-muted);
+  }
+
+  .pillar__verse {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    border-left: 2px solid var(--color-gold);
+    padding-left: var(--space-sm);
+  }
+
+  @media (max-width: 700px) {
+    .pillar__content {
       grid-template-columns: 1fr;
     }
   }

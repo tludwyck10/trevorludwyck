@@ -84,3 +84,22 @@ export const about = {
   src: trevorHeadshot,
   alt: 'Portrait of Trevor Ludwyck',
 };
+
+// ---- My Three Pillars (About page) ----
+// Stock placeholders for now (free Unsplash License) — swap each `src`
+// for a real photo whenever one's ready, same as everywhere else.
+export const pillars = {
+  light: {
+    src: 'https://images.unsplash.com/photo-1516575355332-d2934104e253?auto=format&fit=crop&q=80&w=1600',
+    alt: 'Placeholder — a single lit window in an otherwise dark room',
+  },
+  contrast: {
+    src: 'https://images.unsplash.com/photo-1515138692129-197a2c608cfd?auto=format&fit=crop&q=80&w=1600',
+    alt: 'Placeholder — rim-lit profile portrait against a black background',
+    grayscale: true,
+  },
+  simplicity: {
+    src: 'https://images.unsplash.com/photo-1512514076443-1eef59c260b0?auto=format&fit=crop&q=80&w=1600',
+    alt: 'Placeholder — two birds on a wire against an empty sky',
+  },
+};
