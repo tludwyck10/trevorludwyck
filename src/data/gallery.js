@@ -1,81 +1,86 @@
-// PLACEHOLDER IMAGES
-// Each entry's `src` points to a picsum.photos placeholder. To drop in real
-// photography later, replace `src` with a local path (e.g. "/images/portraits/01.jpg")
-// placed in /public/images/ — the gallery/hero components don't need to change.
-// `alt` text is a placeholder too; write real descriptive alt text per image
-// when actual photos are added.
+// Real photos, imported so Astro optimizes/resizes them at build time
+// (see ResponsiveImage.astro). Add new files to src/assets/images/... and
+// import them here — nothing else needs to change.
+import couple01 from '../assets/images/portraits/couple-01.jpg';
+import couple02 from '../assets/images/portraits/couple-02.jpg';
+import couple03 from '../assets/images/portraits/couple-03.jpg';
+import moment01 from '../assets/images/moments/moment-01.jpg';
+import moment02 from '../assets/images/moments/moment-02.jpg';
+import moment03 from '../assets/images/moments/moment-03.jpg';
+import trevorHeadshot from '../assets/images/about/trevor-headshot.jpg';
 
+// PLACEHOLDER IMAGES — only used where real photos don't exist yet
+// (currently: senior portraits). Once real session photos are ready,
+// import and add them the same way as the couples photos above, and
+// this placeholder() helper can be dropped entirely.
 function placeholder(seed, width = 1200, height = 1500) {
   return `https://picsum.photos/seed/${seed}/${width}/${height}?grayscale`;
 }
 
-// Varied aspect ratios so the masonry gallery reads as an editorial mosaic
-// rather than a uniform grid of identical crops. Cycled by index below.
-const RATIOS = [
-  [1400, 1750], // 4:5 portrait
-  [1500, 1500], // square
-  [1350, 1800], // 3:4 portrait
-  [1650, 1100], // 3:2 landscape
-  [1200, 1800], // 2:3 tall portrait
-];
-
-function ratioFor(index) {
-  return RATIOS[index % RATIOS.length];
+// Interleaves two arrays so a combined gallery reads as one body of work
+// rather than two blocks. Handles unequal lengths (e.g. an empty array)
+// gracefully — it just falls back to the non-empty one, in order.
+function interleave(a, b) {
+  const result = [];
+  const max = Math.max(a.length, b.length);
+  for (let i = 0; i < max; i++) {
+    if (a[i]) result.push(a[i]);
+    if (b[i]) result.push(b[i]);
+  }
+  return result;
 }
 
 // ---- Portraits (senior + couples sessions) ----
 
-export const seniors = Array.from({ length: 8 }, (_, i) => {
-  const [w, h] = ratioFor(i);
-  return { src: placeholder(`tlp-sr-${i + 1}`, w, h), alt: `Placeholder — senior portrait ${i + 1}` };
-});
+export const couples = [
+  { src: couple01, alt: 'Couple laughing together at an indoor gathering, candid black and white portrait' },
+  { src: couple02, alt: 'Established couple embracing and smiling, black and white portrait' },
+  { src: couple03, alt: 'Couple walking arm in arm through a garden pathway, laughing' },
+];
 
-export const couples = Array.from({ length: 8 }, (_, i) => {
-  const [w, h] = ratioFor(i + 2); // offset so interleaved rhythm doesn't repeat seniors' pattern
-  return { src: placeholder(`tlp-cp-${i + 1}`, w, h), alt: `Placeholder — couples portrait ${i + 1}` };
-});
+// No real senior portraits yet — add them here the same way as `couples`
+// above once session photos are ready.
+export const seniors = [];
 
-// Single combined Portraits gallery — interleaved so the page reads as one
-// body of work rather than two categorized sets.
-export const portraits = seniors.flatMap((image, i) => [image, couples[i]]).filter(Boolean);
+// Single combined Portraits gallery.
+export const portraits = interleave(seniors, couples);
 
-// Portraits cover — a studio portrait (black and white, free Unsplash
-// License, photo by Nik Bagherzadegan: unsplash.com/photos/09O1mBwgSJU).
-// Replace with a real session photo when one's ready; no other change
-// needed since ResponsiveImage already builds a srcset for this host.
+// Portraits cover — reuses the couple-embracing shot from the gallery.
 export const portraitsCover = {
-  src: 'https://images.unsplash.com/photo-1782144893518-a3b15d098e34?auto=format&fit=crop&q=80&w=2400',
-  alt: 'Placeholder — studio portrait, seated, dramatic low-key lighting',
+  src: couple02,
+  alt: 'Established couple embracing and smiling, black and white portrait',
 };
 
 // ---- Moments (events — receptions, celebrations, candid coverage) ----
 
-export const moments = Array.from({ length: 10 }, (_, i) => {
-  const [w, h] = ratioFor(i + 3);
-  return { src: placeholder(`tlp-mo-${i + 1}`, w, h), alt: `Placeholder — event moment ${i + 1}` };
-});
+export const moments = [
+  { src: moment01, alt: 'Guest laughing at a candlelit dinner table during a celebration' },
+  { src: moment02, alt: 'Guests laughing together at a restaurant during an event' },
+  { src: moment03, alt: 'Man giving a toast to guests at a celebration dinner' },
+];
 
-// Moments cover — a candid celebration/toast (free Unsplash License, photo
-// by Frankie Cordoba: unsplash.com/photos/Y8gXPB8Mq98). Shot in color, so
-// it's desaturated with CSS (see CategoryCover's grayscaleImage prop) to
-// stay on-palette. Replace with a real event photo when one's ready.
+// Moments cover — reuses the toast shot from the gallery. Already black
+// and white, so no CSS desaturation needed (unlike the old stock photo).
 export const momentsCover = {
-  src: 'https://images.unsplash.com/photo-1696627958251-775068a8ddbc?auto=format&fit=crop&q=80&w=2400',
-  alt: 'Placeholder — candid toast at a celebration dinner',
+  src: moment03,
+  alt: 'Man giving a toast to guests at a celebration dinner',
 };
 
 // ---- Homepage ----
 
-// Small curated set for the homepage masonry — distinct seeds from the
-// Portraits gallery so returning from home doesn't repeat images. Mixes in
-// a couple of Moments-style shots too, since home links to the category
-// chooser rather than one specific gallery.
-export const home = Array.from({ length: 7 }, (_, i) => {
-  const [w, h] = ratioFor(i + 1);
-  return { src: placeholder(`tlp-home-${i + 1}`, w, h), alt: `Placeholder — portrait ${i + 1}`, href: '/portfolio/' };
-});
+// Curated set for the homepage masonry — real photos from both
+// categories, since home links to the category chooser rather than one
+// specific gallery.
+export const home = [
+  { ...couples[0], href: '/portfolio/' },
+  { ...moments[0], href: '/portfolio/' },
+  { ...couples[1], href: '/portfolio/' },
+  { ...moments[1], href: '/portfolio/' },
+  { ...couples[2], href: '/portfolio/' },
+  { ...moments[2], href: '/portfolio/' },
+];
 
 export const about = {
-  src: placeholder('tlp-about', 1400, 1750),
-  alt: 'Placeholder — portrait of Trevor Ludwyck',
+  src: trevorHeadshot,
+  alt: 'Portrait of Trevor Ludwyck',
 };

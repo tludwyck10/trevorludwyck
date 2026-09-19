@@ -1,12 +1,14 @@
 ---
-// Generates a srcset for the picsum.photos placeholder URLs used in
-// src/data/gallery.js. When real photography replaces those placeholders
-// with local files, swap this component's usage for Astro's built-in
-// <Image> (astro:assets) to get real optimized/resized output — this
-// component's job is just to keep placeholder pages honestly responsive
-// in the meantime.
+// Real local photos (imported from src/assets/images/...) are optimized
+// and resized at build time via Astro's <Image>. Remaining placeholder
+// images (picsum.photos / Unsplash URLs, used where real photos don't
+// exist yet — e.g. senior portraits) keep the manual srcset below, since
+// Astro can't optimize remote URLs it doesn't control.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
   sizes: string;
   priority?: boolean;
@@ -39,17 +41,29 @@ function buildSrcSet(url: string) {
 
   return undefined;
 }
-
-const srcset = buildSrcSet(src);
 ---
 
-<img
-  src={src}
-  srcset={srcset}
-  sizes={sizes}
-  alt={alt}
-  class={className}
-  loading={priority ? 'eager' : 'lazy'}
-  decoding="async"
-  fetchpriority={priority ? 'high' : undefined}
-/>
+{typeof src === 'string' ? (
+  <img
+    src={src}
+    srcset={buildSrcSet(src)}
+    sizes={sizes}
+    alt={alt}
+    class={className}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+    fetchpriority={priority ? 'high' : undefined}
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    sizes={sizes}
+    widths={widths}
+    format="webp"
+    quality={82}
+    class={className}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+)}
