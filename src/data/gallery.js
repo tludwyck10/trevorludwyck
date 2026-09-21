@@ -107,6 +107,7 @@ export const home = [
   { ...outdoors[0], href: '/portfolio/' },
   { ...couples[1], href: '/portfolio/' },
   { ...moments[1], href: '/portfolio/' },
+  { ...outdoors[1], href: '/portfolio/' },
   { ...couples[2], href: '/portfolio/' },
   { ...moments[2], href: '/portfolio/' },
 ];
