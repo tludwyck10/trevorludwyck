@@ -20,11 +20,6 @@ import { outdoors } from '../../../data/gallery.js';
   <section class="page-gallery wrap">
     <Gallery images={outdoors} hoverColor />
   </section>
-
-  <section class="page-cta wrap">
-    <h2>Have a session in mind?</h2>
-    <a href="/contact/" class="btn btn--gold">Inquire</a>
-  </section>
 </BaseLayout>
 
 <style>
@@ -46,15 +41,5 @@ import { outdoors } from '../../../data/gallery.js';
 
   .page-gallery {
     padding-bottom: var(--space-xl);
-  }
-
-  .page-cta {
-    padding-bottom: var(--space-xl);
-    text-align: center;
-  }
-
-  .page-cta h2 {
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-    margin-bottom: var(--space-md);
   }
 </style>

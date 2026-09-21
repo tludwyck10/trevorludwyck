@@ -12,9 +12,10 @@ near-monochrome palette, restrained typography, no JS framework.
 - **Astro 7**, static output (`output: 'static'`, the default) — no
   server/SSR anywhere on this site.
 - **No UI framework.** All interactivity (mobile nav toggle, pricing
-  calculator, contact form conditional fields, "My Three Pillars"
-  disclosure) is vanilla TypeScript in small per-component `<script>`
-  tags. Keep it that way — don't reach for React/Vue/etc.
+  calculator, "My Three Pillars" disclosure) is vanilla TypeScript in
+  small per-component `<script>` tags. Keep it that way — don't reach
+  for React/Vue/etc. The Contact page has no script at all now — it's
+  a plain Formspree POST (name/email/message).
 - **Fonts:** `@fontsource/inter` + `@fontsource/space-grotesk`,
   self-hosted (imported in `src/styles/global.css`). No Google Fonts CDN
   request at runtime.
@@ -230,6 +231,14 @@ array — there's no separate cover-only image file.
 - **Investment page is intentionally paused**, not deleted — see
   "Restoring the Investment page" above. `/investment` currently
   redirects to `/contact`.
+- **Site is currently "portfolio-first," not a booking funnel** — an
+  explicit, deliberate choice, not an oversight. The three portfolio
+  gallery pages (portraits/moments/outdoors) have no "Inquire" CTA at
+  the bottom, and the Contact form has no session-type / portrait-type
+  / event-type fields — just name, email, message. If a future request
+  wants those back (or wants the site to push harder toward booking),
+  that's a real content decision — don't silently re-add the old
+  fields/CTAs without asking, since removing them was intentional.
 - **Senior portraits gallery is empty** (`seniors = []` in `gallery.js`)
   — the Portraits gallery currently only shows the 3 real couples photos
   until real senior session photos are added.

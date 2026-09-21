@@ -6,28 +6,20 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
 
 <BaseLayout
   title="Contact"
-  description="Inquire about a portrait session or event coverage with Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
+  description="Get in touch with Trevor Ludwyck Photography, serving Celina, TX and Dallas–Fort Worth."
 >
   <section class="contact wrap">
     <div class="contact__intro">
       <p class="eyebrow">Contact</p>
-      <h1>Let's talk about your session.</h1>
+      <h1>Let's connect.</h1>
       <p>
         Tell me a bit about what you're looking for and I'll follow up by
-        email to find a time that works.
+        email.
       </p>
     </div>
 
     <form class="contact__form" id="contact-form" action={FORMSPREE_ENDPOINT} method="POST">
       <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" />
-      <input type="hidden" name="estimate" id="estimate-field" />
-
-      <div class="contact__estimate-chip" id="estimate-chip" hidden>
-        <p>
-          Estimate: <strong id="estimate-chip-text"></strong>
-        </p>
-        <a href="/investment/#calculator">Change</a>
-      </div>
 
       <div class="field">
         <label for="name">Name</label>
@@ -40,88 +32,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
       </div>
 
       <div class="field">
-        <label for="session-type">Session type</label>
-        <select id="session-type" name="session_type" required>
-          <option value="" disabled selected>Select one</option>
-          <option value="Portraits">Portraits</option>
-          <option value="Moments">Moments</option>
-        </select>
-      </div>
-
-      <div class="field-group" id="portrait-fields" hidden>
-        <div class="field">
-          <label for="portrait-type">Portrait type</label>
-          <select id="portrait-type" name="portrait_type" required>
-            <option value="" disabled selected>Select one</option>
-            <option value="Senior">Senior</option>
-            <option value="Couple">Couple</option>
-            <option value="Engagement">Engagement</option>
-            <option value="Professional">Professional</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="portrait-date">Date <span class="field__optional">(optional)</span></label>
-            <input type="date" id="portrait-date" name="session_date" />
-          </div>
-          <div class="field">
-            <label for="portrait-start-time">Start time</label>
-            <input type="time" id="portrait-start-time" name="start_time" />
-          </div>
-          <div class="field">
-            <label for="portrait-end-time">End time</label>
-            <input type="time" id="portrait-end-time" name="end_time" />
-          </div>
-        </div>
-      </div>
-
-      <div class="field-group" id="moments-fields" hidden>
-        <div class="field">
-          <label for="event-type">Event type</label>
-          <select id="event-type" name="event_type" required>
-            <option value="" disabled selected>Select one</option>
-            <option value="Wedding">Wedding</option>
-            <option value="Rehearsal Dinner">Rehearsal Dinner</option>
-            <option value="Reception">Reception</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="event-hours">Hours of coverage</label>
-            <input type="number" id="event-hours" name="event_hours" min="1" step="0.5" placeholder="e.g. 4" />
-          </div>
-          <div class="field">
-            <label for="event-location">Event location</label>
-            <input type="text" id="event-location" name="event_location" placeholder="Venue name or city" />
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="event-date">Date <span class="field__optional">(optional)</span></label>
-            <input type="date" id="event-date" name="session_date" />
-          </div>
-          <div class="field">
-            <label for="event-start-time">Start time</label>
-            <input type="time" id="event-start-time" name="start_time" />
-          </div>
-          <div class="field">
-            <label for="event-end-time">End time</label>
-            <input type="time" id="event-end-time" name="end_time" />
-          </div>
-        </div>
-      </div>
-
-      <div class="field">
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="5" required></textarea>
       </div>
 
-      <button type="submit" class="btn btn--gold">Send Inquiry</button>
+      <button type="submit" class="btn btn--gold">Send Message</button>
     </form>
   </section>
 </BaseLayout>
@@ -152,35 +67,6 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
     max-width: 560px;
   }
 
-  .contact__estimate-chip[hidden] {
-    display: none;
-  }
-
-  .contact__estimate-chip {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    background: var(--color-cream);
-    border: 1px solid var(--color-border);
-    padding: 0.85rem 1.1rem;
-    font-size: 0.9rem;
-  }
-
-  .contact__estimate-chip strong {
-    color: var(--color-text);
-  }
-
-  .contact__estimate-chip a {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    flex-shrink: 0;
-  }
-
   .field {
     display: flex;
     flex-direction: column;
@@ -194,15 +80,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
     color: var(--color-text-muted);
   }
 
-  .field__optional {
-    text-transform: none;
-    letter-spacing: normal;
-    font-weight: 400;
-    opacity: 0.75;
-  }
-
   .field input,
-  .field select,
   .field textarea {
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -214,29 +92,9 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
   }
 
   .field input:focus,
-  .field select:focus,
   .field textarea:focus {
     outline: none;
     border-color: var(--color-gold);
-  }
-
-  .field-group[hidden] {
-    display: none;
-  }
-
-  .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    background: var(--color-cream);
-    border: 1px solid var(--color-border);
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--space-sm);
   }
 
   .contact__form .btn {
@@ -258,42 +116,3 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xppwwvgj';
     }
   }
 </style>
-
-<script>
-  const chip = document.getElementById('estimate-chip') as HTMLElement;
-  const chipText = document.getElementById('estimate-chip-text') as HTMLElement;
-  const estimateField = document.getElementById('estimate-field') as HTMLInputElement;
-  const sessionType = document.getElementById('session-type') as HTMLSelectElement;
-  const portraitFields = document.getElementById('portrait-fields') as HTMLElement;
-  const momentsFields = document.getElementById('moments-fields') as HTMLElement;
-
-  function setGroupActive(group: HTMLElement, active: boolean) {
-    group.hidden = !active;
-    group.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select').forEach((el) => {
-      el.disabled = !active;
-    });
-  }
-
-  function syncFieldGroups() {
-    setGroupActive(portraitFields, sessionType.value === 'Portraits');
-    setGroupActive(momentsFields, sessionType.value === 'Moments');
-  }
-
-  sessionType.addEventListener('change', syncFieldGroups);
-  syncFieldGroups();
-
-  const params = new URLSearchParams(window.location.search);
-  const estimate = params.get('estimate');
-  const session = params.get('session');
-
-  if (estimate) {
-    chipText.textContent = estimate;
-    chip.hidden = false;
-    estimateField.value = estimate;
-  }
-
-  if (session === 'Portraits' || session === 'Moments') {
-    sessionType.value = session;
-    syncFieldGroups();
-  }
-</script>
