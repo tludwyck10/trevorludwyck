@@ -2,12 +2,27 @@
 // (see ResponsiveImage.astro). Add new files to src/assets/images/... and
 // import them here — nothing else needs to change.
 import couple01 from '../assets/images/portraits/couple-01.jpg';
+import couple01Color from '../assets/images/portraits/couple-01-color.jpg';
 import couple02 from '../assets/images/portraits/couple-02.jpg';
+import couple02Color from '../assets/images/portraits/couple-02-color.jpg';
 import couple03 from '../assets/images/portraits/couple-03.jpg';
+import couple03Color from '../assets/images/portraits/couple-03-color.jpg';
 import moment01 from '../assets/images/moments/moment-01.jpg';
+import moment01Color from '../assets/images/moments/moment-01-color.jpg';
 import moment02 from '../assets/images/moments/moment-02.jpg';
+import moment02Color from '../assets/images/moments/moment-02-color.jpg';
 import moment03 from '../assets/images/moments/moment-03.jpg';
+import moment03Color from '../assets/images/moments/moment-03-color.jpg';
 import outdoor01 from '../assets/images/outdoors/outdoor-01.jpg';
+import outdoor01Color from '../assets/images/outdoors/outdoor-01-color.jpg';
+import outdoor02 from '../assets/images/outdoors/outdoor-02.jpg';
+import outdoor02Color from '../assets/images/outdoors/outdoor-02-color.jpg';
+import outdoor03 from '../assets/images/outdoors/outdoor-03.jpg';
+import outdoor03Color from '../assets/images/outdoors/outdoor-03-color.jpg';
+import outdoor04 from '../assets/images/outdoors/outdoor-04.jpg';
+import outdoor04Color from '../assets/images/outdoors/outdoor-04-color.jpg';
+import outdoor05 from '../assets/images/outdoors/outdoor-05.jpg';
+import outdoor05Color from '../assets/images/outdoors/outdoor-05-color.jpg';
 import trevorHeadshot from '../assets/images/about/trevor-headshot.webp';
 
 // PLACEHOLDER IMAGES — only used where real photos don't exist yet
@@ -34,9 +49,9 @@ function interleave(a, b) {
 // ---- Portraits (senior + couples sessions) ----
 
 export const couples = [
-  { src: couple01, alt: 'Couple laughing together at an indoor gathering, candid black and white portrait' },
-  { src: couple02, alt: 'Established couple embracing and smiling, black and white portrait' },
-  { src: couple03, alt: 'Couple walking arm in arm through a garden pathway, laughing' },
+  { src: couple01, srcColor: couple01Color, alt: 'Couple laughing together at an indoor gathering, candid black and white portrait' },
+  { src: couple02, srcColor: couple02Color, alt: 'Established couple embracing and smiling, black and white portrait' },
+  { src: couple03, srcColor: couple03Color, alt: 'Couple walking arm in arm through a garden pathway, laughing' },
 ];
 
 // No real senior portraits yet — add them here the same way as `couples`
@@ -55,9 +70,9 @@ export const portraitsCover = {
 // ---- Moments (events — receptions, celebrations, candid coverage) ----
 
 export const moments = [
-  { src: moment01, alt: 'Guest laughing at a candlelit dinner table during a celebration' },
-  { src: moment02, alt: 'Guests laughing together at a restaurant during an event' },
-  { src: moment03, alt: 'Man giving a toast to guests at a celebration dinner' },
+  { src: moment01, srcColor: moment01Color, alt: 'Guest laughing at a candlelit dinner table during a celebration' },
+  { src: moment02, srcColor: moment02Color, alt: 'Guests laughing together at a restaurant during an event' },
+  { src: moment03, srcColor: moment03Color, alt: 'Man giving a toast to guests at a celebration dinner' },
 ];
 
 // Moments cover — reuses the toast shot from the gallery. Already black
@@ -70,10 +85,14 @@ export const momentsCover = {
 // ---- Outdoors (outdoor lifestyle photography) ----
 
 export const outdoors = [
-  { src: outdoor01, alt: 'Close-up portrait lit by a headlamp, outdoors at night' },
+  { src: outdoor01, srcColor: outdoor01Color, alt: 'Close-up portrait lit by a headlamp, outdoors at night' },
+  { src: outdoor02, srcColor: outdoor02Color, alt: 'Black retriever leaping from the water with a mallard duck, decoys scattered around' },
+  { src: outdoor03, srcColor: outdoor03Color, alt: "Extreme close-up of a black dog's amber eye" },
+  { src: outdoor04, srcColor: outdoor04Color, alt: 'Hunter with a headlamp walking through heavy snowfall at night, decoys in the foreground' },
+  { src: outdoor05, srcColor: outdoor05Color, alt: 'Man holding a compound bow, talking with a group at an outdoor archery event' },
 ];
 
-// Outdoors cover — only real photo so far; also the gallery's one entry.
+// Outdoors cover — reuses the headlamp portrait from the gallery.
 export const outdoorsCover = {
   src: outdoor01,
   alt: 'Close-up portrait lit by a headlamp, outdoors at night',

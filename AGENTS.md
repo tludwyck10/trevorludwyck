@@ -233,10 +233,9 @@ array — there's no separate cover-only image file.
 - **Senior portraits gallery is empty** (`seniors = []` in `gallery.js`)
   — the Portraits gallery currently only shows the 3 real couples photos
   until real senior session photos are added.
-- **Outdoors gallery has only 1 photo so far** (`outdoors` in
-  `gallery.js`) — same single image is reused as both the gallery entry
-  and the category cover on `/portfolio/`. Add more the same way as any
-  other section once more session photos are ready.
+- **Outdoors gallery has 5 photos** (`outdoors` in `gallery.js`); the
+  cover on `/portfolio/` reuses the first one (the headlamp portrait).
+  All 5 have a `srcColor` pair (see "Hover-to-color" above).
 - **"My Three Pillars"** (About page) uses 3 free-license Unsplash stock
   photos as placeholders — meant to be swapped for Trevor's own photos
   eventually, same process as any other image swap.
