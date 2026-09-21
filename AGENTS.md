@@ -1,10 +1,11 @@
 # Trevor Ludwyck Photography — CLAUDE.md
 
 Editorial portrait/event photography site for Trevor Ludwyck, based in
-Celina, TX (serving Dallas–Fort Worth). Two service categories:
-**Portraits** (senior, couples, engagement, professional) and **Moments**
-(events — weddings, rehearsal dinners, receptions). Brand is deliberately
-minimal: near-monochrome palette, restrained typography, no JS framework.
+Celina, TX (serving Dallas–Fort Worth). Three service categories:
+**Portraits** (senior, couples, engagement, professional), **Moments**
+(events — weddings, rehearsal dinners, receptions), and **Outdoors**
+(outdoor lifestyle photography). Brand is deliberately minimal:
+near-monochrome palette, restrained typography, no JS framework.
 
 ## Tech stack
 
@@ -49,10 +50,12 @@ src/
   pages/            one folder per route (file-based routing)
     index.astro           homepage — masonry of curated real photos, no hero
     portfolio/
-      index.astro          category chooser: two stacked "cover" blocks
-                            (Portraits / Moments), click-through to galleries
+      index.astro          category chooser: stacked "cover" blocks
+                            (Portraits / Moments / Outdoors), click-through
+                            to galleries
       portraits/index.astro  Portraits masonry gallery
       moments/index.astro    Moments masonry gallery
+      outdoors/index.astro   Outdoors masonry gallery
     about/index.astro     bio + "My Three Pillars" click-to-expand section
     contact/index.astro   inquiry form, fields change based on session type
     _investment/index.astro  PAUSED — see "Known quirks" below
@@ -187,9 +190,10 @@ array — there's no separate cover-only image file.
   copy direction) without asking first — this was an explicit standing
   instruction from the original brief and holds for any new visual
   decision.
-- **Never imply the business does anything outside Portraits + Moments**
-  (e.g. don't invent a "family photography" or "product photography"
-  offering) — the two-category scope is deliberate, not incomplete.
+- **Never imply the business does anything outside Portraits + Moments +
+  Outdoors** (e.g. don't invent a "family photography" or "product
+  photography" offering) — the three-category scope is deliberate, not
+  incomplete.
 - **Default to less, not more.** Several rounds of this project's history
   were "actually, simplify this" (homepage went hero+intro+grid → just a
   masonry grid; Portfolio covers went title+copy+CTA → just "View the
@@ -207,6 +211,10 @@ array — there's no separate cover-only image file.
 - **Senior portraits gallery is empty** (`seniors = []` in `gallery.js`)
   — the Portraits gallery currently only shows the 3 real couples photos
   until real senior session photos are added.
+- **Outdoors gallery has only 1 photo so far** (`outdoors` in
+  `gallery.js`) — same single image is reused as both the gallery entry
+  and the category cover on `/portfolio/`. Add more the same way as any
+  other section once more session photos are ready.
 - **"My Three Pillars"** (About page) uses 3 free-license Unsplash stock
   photos as placeholders — meant to be swapped for Trevor's own photos
   eventually, same process as any other image swap.

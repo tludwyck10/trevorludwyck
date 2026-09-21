@@ -1,7 +1,7 @@
 # Trevor Ludwyck Photography
 
-Photography site — two categories, Portraits and Moments. Built with
-[Astro](https://astro.build).
+Photography site — three categories: Portraits, Moments, and Outdoors.
+Built with [Astro](https://astro.build).
 
 ## Commands
 
@@ -14,7 +14,7 @@ Photography site — two categories, Portraits and Moments. Built with
 
 ## Project structure
 
-- `src/pages/` — one folder per route. `/portfolio/` is the category-chooser landing page (two stacked covers: Portraits, Moments), linking into `/portfolio/portraits/` and `/portfolio/moments/`, the actual masonry galleries. Also `about/`, `contact/`. `_investment/` (underscore prefix) is paused/excluded from the build — see below.
+- `src/pages/` — one folder per route. `/portfolio/` is the category-chooser landing page (stacked covers: Portraits, Moments, Outdoors), linking into `/portfolio/portraits/`, `/portfolio/moments/`, and `/portfolio/outdoors/`, the actual masonry galleries. Also `about/`, `contact/`. `_investment/` (underscore prefix) is paused/excluded from the build — see below.
 - `src/components/` — `Nav`, `Footer`, `Gallery`, `CategoryCover` (the reusable Portraits/Moments cover block), `PricingCalculator` (the estimate tool on `/contact/`), `ResponsiveImage`, `PricingCard`
 - `src/layouts/BaseLayout.astro` — shared `<head>`, SEO meta tags, nav + footer
 - `src/data/gallery.js` — every image on the site as `{ src, alt }` objects. `seniors`/`couples` combine into `portraits` (shown on `/portfolio/portraits/`); `moments` is the events gallery; `portraitsCover`/`momentsCover` are the two cover-page hero images; `home` is the curated homepage set. Real photos live in `src/assets/images/...` and are imported directly (so Astro optimizes them at build time); `seniors` still uses placeholder URLs since there are no real senior portraits yet.

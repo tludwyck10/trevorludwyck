@@ -7,6 +7,7 @@ import couple03 from '../assets/images/portraits/couple-03.jpg';
 import moment01 from '../assets/images/moments/moment-01.jpg';
 import moment02 from '../assets/images/moments/moment-02.jpg';
 import moment03 from '../assets/images/moments/moment-03.jpg';
+import outdoor01 from '../assets/images/outdoors/outdoor-01.jpg';
 import trevorHeadshot from '../assets/images/about/trevor-headshot.webp';
 
 // PLACEHOLDER IMAGES — only used where real photos don't exist yet
@@ -64,6 +65,18 @@ export const moments = [
 export const momentsCover = {
   src: moment03,
   alt: 'Man giving a toast to guests at a celebration dinner',
+};
+
+// ---- Outdoors (outdoor lifestyle photography) ----
+
+export const outdoors = [
+  { src: outdoor01, alt: 'Close-up portrait lit by a headlamp, outdoors at night' },
+];
+
+// Outdoors cover — only real photo so far; also the gallery's one entry.
+export const outdoorsCover = {
+  src: outdoor01,
+  alt: 'Close-up portrait lit by a headlamp, outdoors at night',
 };
 
 // ---- Homepage ----

@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CategoryCover from '../../components/CategoryCover.astro';
-import { portraitsCover, momentsCover } from '../../data/gallery.js';
+import { portraitsCover, momentsCover, outdoorsCover } from '../../data/gallery.js';
 ---
 
 <BaseLayout
   title="Portfolio"
-  description="Trevor Ludwyck Photography portfolio — portrait sessions and event coverage in Celina, TX and the Dallas–Fort Worth area."
+  description="Trevor Ludwyck Photography portfolio — portrait sessions, event coverage, and outdoor lifestyle photography in Celina, TX and the Dallas–Fort Worth area."
 >
   <h1 class="visually-hidden">Portfolio</h1>
 
@@ -25,5 +25,13 @@ import { portraitsCover, momentsCover } from '../../data/gallery.js';
     href="/portfolio/moments/"
     imageSrc={momentsCover.src}
     imageAlt={momentsCover.alt}
+  />
+
+  <CategoryCover
+    title="Outdoors"
+    label="Outdoor Lifestyle Photography"
+    href="/portfolio/outdoors/"
+    imageSrc={outdoorsCover.src}
+    imageAlt={outdoorsCover.alt}
   />
 </BaseLayout>

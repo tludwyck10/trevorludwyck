@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Gallery from '../../../components/Gallery.astro';
+import { outdoors } from '../../../data/gallery.js';
+---
+
+<BaseLayout
+  title="Outdoors — Celina & Dallas–Fort Worth, TX"
+  description="Outdoor lifestyle photography in Celina, TX and the Dallas–Fort Worth area."
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">Outdoors</p>
+    <h1>Life, outside.</h1>
+    <p class="page-intro__copy">
+      Away from the studio, into real conditions — same discipline with
+      light, wherever it's found.
+    </p>
+  </section>
+
+  <section class="page-gallery wrap">
+    <Gallery images={outdoors} />
+  </section>
+
+  <section class="page-cta wrap">
+    <h2>Have a session in mind?</h2>
+    <a href="/contact/" class="btn btn--gold">Inquire</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-block: calc(var(--space-xl) + 2rem) var(--space-lg);
+    max-width: 680px;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    margin-block: var(--space-sm) var(--space-md);
+  }
+
+  .page-intro__copy {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 55ch;
+  }
+
+  .page-gallery {
+    padding-bottom: var(--space-xl);
+  }
+
+  .page-cta {
+    padding-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .page-cta h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+</style>
