@@ -104,8 +104,7 @@ export const outdoorsCover = {
 // categories, since home links to the category chooser rather than one
 // specific gallery.
 export const home = [
-  { ...couples[0], href: '/portfolio/' },
-  { ...moments[0], href: '/portfolio/' },
+  { ...outdoors[0], href: '/portfolio/' },
   { ...couples[1], href: '/portfolio/' },
   { ...moments[1], href: '/portfolio/' },
   { ...couples[2], href: '/portfolio/' },
