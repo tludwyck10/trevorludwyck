@@ -148,12 +148,34 @@ which branches on the `src` prop type:
 Nothing else needs to change — `ResponsiveImage` and every page that
 consumes `gallery.js` picks it up automatically.
 
-**Color treatment:** real photos are shot black-and-white already. If a
+**Color treatment:** real photos are exported black-and-white. If a
 placeholder/stock photo is in color, desaturate it with CSS
 (`filter: grayscale(1)`, see the `grayscale` flag pattern in
 `gallery.js`'s `pillars` object) rather than leaving it in color — the
 palette needs to stay near-monochrome even with mismatched source
 material.
+
+**Hover-to-color:** on the three individual portfolio gallery pages
+(`/portfolio/portraits/`, `/portfolio/moments/`, `/portfolio/outdoors/`
+— not the homepage, not the `/portfolio/` cover page, not About), a
+photo can reveal a color version on hover. To wire one up:
+1. Import the **original color** file (before the B&W edit) the same
+   way as any other photo, e.g. `couple04Color` from
+   `src/assets/images/portraits/couple-04-color.jpg`.
+2. Add it as `srcColor` alongside `src` on that gallery item in
+   `gallery.js`, e.g. `{ src: couple04, srcColor: couple04Color, alt: '...' }`.
+3. Nothing else needed — `Gallery.astro`'s `hoverColor` prop (already
+   set on all three category pages) picks up any item with a `srcColor`
+   and stacks the two as a CSS-only crossfade (`.gallery__frame` /
+   `.gallery__layer` in `Gallery.astro`, `aspect-ratio` set inline from
+   the B&W image's real dimensions so masonry layout doesn't shift).
+   Items with no `srcColor` just render as plain black-and-white, same
+   as before.
+- This is hover-only (no JS, pure CSS `:hover`), so touch devices with
+  no hover state won't see the color reveal — acceptable for now per
+  the original ask; revisit with a tap-toggle if that changes.
+- The B&W and color images must be the same shot/crop (same
+  width/height) since they're layered exactly on top of each other.
 
 **Cover images** (the big single-photo blocks on `/portfolio/`) currently
 just reuse the strongest photo already in that category's own gallery

@@ -4,29 +4,44 @@ import type { ImageMetadata } from 'astro';
 
 interface GalleryItem {
   src: string | ImageMetadata;
+  srcColor?: ImageMetadata;
   alt: string;
   href?: string;
 }
 
 interface Props {
   images: GalleryItem[];
+  // Reveal a color version of each photo on hover. Only meaningful for
+  // items with a `srcColor` counterpart to the (black-and-white) `src` —
+  // items without one just render normally. Opt-in per page (see
+  // portraits/moments/outdoors) rather than global, since the black-and-
+  // white treatment is the default everywhere else on the site.
+  hoverColor?: boolean;
 }
 
-const { images } = Astro.props;
+const { images, hoverColor = false } = Astro.props;
+
+const sizes = '(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw';
 ---
 
 <div class="gallery">
-  {images.map((image) => (
-    <figure class="gallery__item">
-      {image.href ? (
-        <a href={image.href} class="gallery__link">
-          <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw" />
-        </a>
-      ) : (
-        <ResponsiveImage src={image.src} alt={image.alt} sizes="(min-width: 1100px) 33vw, (min-width: 720px) 50vw, 100vw" />
-      )}
-    </figure>
-  ))}
+  {images.map((image) => {
+    const showColor = hoverColor && image.srcColor && typeof image.src !== 'string';
+    const photo = showColor ? (
+      <div class="gallery__frame" style={{ aspectRatio: `${(image.src as ImageMetadata).width} / ${(image.src as ImageMetadata).height}` }}>
+        <ResponsiveImage src={image.src} alt={image.alt} sizes={sizes} class="gallery__layer gallery__layer--bw" />
+        <ResponsiveImage src={image.srcColor as ImageMetadata} alt={image.alt} sizes={sizes} class="gallery__layer gallery__layer--color" />
+      </div>
+    ) : (
+      <ResponsiveImage src={image.src} alt={image.alt} sizes={sizes} />
+    );
+
+    return (
+      <figure class="gallery__item">
+        {image.href ? <a href={image.href} class="gallery__link">{photo}</a> : photo}
+      </figure>
+    );
+  })}
 </div>
 
 <style>
@@ -47,8 +62,32 @@ const { images } = Astro.props;
     transition: opacity 0.2s ease;
   }
 
-  .gallery__link:hover :global(img) {
+  .gallery__link:hover > :global(img) {
     opacity: 0.85;
+  }
+
+  .gallery__frame {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    background: var(--color-black);
+  }
+
+  .gallery__item :global(.gallery__layer) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery__item :global(.gallery__layer--color) {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .gallery__frame:hover :global(.gallery__layer--color) {
+    opacity: 1;
   }
 
   @media (max-width: 1000px) {
